@@ -28,7 +28,31 @@
 
 </details>
 
-### 有關類、函數
+### 字串
+
+```python
+# Wrong:
+s ='this is a very long string if I had the energy to type more and more ...'
+
+# Correct:
+s = """ this is a very
+        long string if I had the
+        energy to type more and more ..."""
+
+# Correct:
+s = ("this is a very"
+     "long string too"
+     "for sure ..."
+    )
+
+# Correct:
+s = ' this is a very \
+      long string if I had the \
+      energy to type more and more ..'
+```
+
+
+### 類、函數
 
 [Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
