@@ -3,7 +3,10 @@
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8...風格合併而成
 * [Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
-### 一、代碼布局
+## 一、代碼布局
+
+<details>
+<summary>詳細定義</summary>
 
 * Python code layout 風格通常指的是 Python 程序員在編寫 Python 程序時所遵循的程式碼風格規範，通常是指 PEP 8 規範。
 
@@ -23,8 +26,9 @@
 
   * 對於文檔字符串使用三引號（"""）而不是單引號（''），文檔字符串應縮進一次（與程式碼縮進相同）。
 
+</details>
 
-#### 有關類、函數
+### 有關類、函數
 
 [Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
