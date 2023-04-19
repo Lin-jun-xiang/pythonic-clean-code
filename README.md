@@ -3,7 +3,7 @@
 
 [中文版說明書](./README_中文.md)
 
-### 一、代碼布局
+### 1. Code-Lay-out
 
 * Python code layout style usually refers to the code style guidelines that Python programmers follow when writing Python programs, typically referred to as the PEP 8 guidelines.
 
