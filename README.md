@@ -6,7 +6,10 @@
 
 * [中文版說明書](./README_中文.md)
 
-### 1. Code-Lay-out
+## 1. Code-Lay-out
+
+<details>
+<summary>Details</summary>
 
 * Python code layout style usually refers to the code style guidelines that Python programmers follow when writing Python programs, typically referred to as the PEP 8 guidelines.
 
@@ -20,8 +23,9 @@
   * Use UpperCamelCase style for class names, lower_case_with_underscores style for function and method names, and lower_case_with_underscores style for variable names.
   * Use triple quotes (""") for docstrings instead of single quotes (''). Docstrings should be indented the same as the code.
 
+</details>
 
-#### About Class & Function
+### About Class & Function
 
 [Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
