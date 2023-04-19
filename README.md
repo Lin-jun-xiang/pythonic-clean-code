@@ -1,7 +1,10 @@
 # clean-code-pep8
-[Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
-[中文版說明書](./README_中文.md)
+* The guidelines defined in this article are not the ultimate best practices, but rather a combination of observations from multiple projects and the organization of PEP8 style recommendations.
+
+* [Style Guide for Python Code](https://peps.python.org/pep-0008/)
+
+* [中文版說明書](./README_中文.md)
 
 ### 1. Code-Lay-out
 
@@ -20,6 +23,8 @@
 
 #### About Class & Function
 
+[Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
+
 ```python
 # Wrong:
 def long_function_name(
@@ -29,24 +34,18 @@ def long_function_name(
 
 # Correct:
 def long_function_name(
-        var_one, var_two,
-        var_three, var_four):
-    print(var_one)
-
-# Correct:
-def long_function_name(
     var_one, var_two,
     var_three, var_four
 ):
     print(var_one)
 
-# Better with "type hint":
+# Better with "annotation and type hint":
 def long_function_name(
     var_one: int,
     var_two: str = 'default',
     var_three: Optional[str] = None,
     var_four: Optional[int] = None
 ) -> None:
+    """A example"""
     print(var_one)
-
 ```
