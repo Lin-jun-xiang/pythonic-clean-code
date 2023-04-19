@@ -1,6 +1,7 @@
 # clean-code-pep8
-[Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
+* 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8...風格合併而成
+* [Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
 ### 一、代碼布局
 
@@ -25,6 +26,8 @@
 
 #### 有關類、函數
 
+[Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
+
 ```python
 # Wrong:
 def long_function_name(
@@ -34,24 +37,18 @@ def long_function_name(
 
 # Correct:
 def long_function_name(
-        var_one, var_two,
-        var_three, var_four):
-    print(var_one)
-
-# Correct:
-def long_function_name(
     var_one, var_two,
     var_three, var_four
 ):
     print(var_one)
 
-# Better with "type hint":
+# Better with "annotation and type hint":
 def long_function_name(
     var_one: int,
     var_two: str = 'default',
     var_three: Optional[str] = None,
     var_four: Optional[int] = None
 ) -> None:
+    """A example"""
     print(var_one)
-
 ```
