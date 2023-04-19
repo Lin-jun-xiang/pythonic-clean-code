@@ -25,7 +25,30 @@
 
 </details>
 
-### About Class & Function
+### String
+
+```python
+# Wrong:
+s ='this is a very long string if I had the energy to type more and more ...'
+
+# Correct:
+s = """ this is a very
+        long string if I had the
+        energy to type more and more ..."""
+
+# Correct:
+s = ("this is a very"
+     "long string too"
+     "for sure ..."
+    )
+
+# Correct:
+s = ' this is a very \
+      long string if I had the \
+      energy to type more and more ..'
+```
+
+### Class & Function
 
 [Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
