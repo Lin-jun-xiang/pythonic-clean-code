@@ -111,7 +111,7 @@ Multiple line Comment
 ### DocStrings
 
 * Used to explain documentation programs, usually used to annotate functions
-
+* * If you use the `vscode` editor, you can automatically generate DocStrings (see [link](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator))
 * Python Docstrings
 
     ```python
@@ -161,23 +161,19 @@ Multiple line Comment
 * Numpydoc (Suggest !)
 
     ```python
-    """
-    My numpydoc description of a kind
+    """My numpydoc description of a kind
     of very exhautive numpydoc format docstring.
 
     Parameters
     ----------
-    first : array_like
-    the 1st param name `first`
-    second :
-    the 2nd param
-    third : {'value', 'other'}, optional
-    the 3rd param, by default 'value'
+    param1 : int
+        this is the first param
+    param2 : int, Optional
+        this is a second param
 
     Returns
     -------
-    string
-    a value in a string
+    This is a description of what is returned
 
     Raises
     ------

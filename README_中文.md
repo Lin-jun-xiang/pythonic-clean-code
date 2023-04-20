@@ -115,6 +115,7 @@ name = 'JunXiang'
 ### DocStrings
 
 * 用於解釋文檔程序，通常拿來註釋函式
+* 如果您使用 `vscode` 編輯器，可以自動生成 DocStrings (參考[連結](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4%B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
 
 * Python Docstrings
 
@@ -165,23 +166,19 @@ name = 'JunXiang'
 * Numpydoc (Suggest !)
 
     ```python
-    """
-    My numpydoc description of a kind
+    """My numpydoc description of a kind
     of very exhautive numpydoc format docstring.
 
     Parameters
     ----------
-    first : array_like
-    the 1st param name `first`
-    second :
-    the 2nd param
-    third : {'value', 'other'}, optional
-    the 3rd param, by default 'value'
+    param1 : int
+        this is the first param
+    param2 : int, Optional
+        this is a second param
 
     Returns
     -------
-    string
-    a value in a string
+    This is a description of what is returned
 
     Raises
     ------
@@ -191,3 +188,5 @@ name = 'JunXiang'
     when an other error
     """
     ```
+
+    
