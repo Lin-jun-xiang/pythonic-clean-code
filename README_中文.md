@@ -3,6 +3,19 @@
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8...風格合併而成 (因此有些會與 PEP8 不相符)
 * [Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
+---
+
+* Outline
+    * [代碼布局](#一代碼布局)
+        * [字串](#字串)
+        * [類、函數](#類函數)
+    * [註釋](#二註釋)
+        * [單行註釋](#單行註釋)
+        * [多行註釋](#多行註釋)
+        * [DocStrings](#docstrings)
+
+---
+
 ## 一、代碼布局
 
 <details>
@@ -45,7 +58,7 @@ s = ("this is a very"
      "for sure ..."
     )
 
-# Correct:
+# Correct (PEP8 not suggest):
 s = ' this is a very \
       long string if I had the \
       energy to type more and more ..'
@@ -53,8 +66,6 @@ s = ' this is a very \
 
 
 ### 類、函數
-
-[Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
 ```python
 # Wrong:
@@ -80,3 +91,103 @@ def long_function_name(
     """A example"""
     print(var_one)
 ```
+
+## 二、註釋
+
+### 單行註釋
+
+```python
+name = 'JunXiang' # 單行註釋
+
+# 單行註釋
+name = 'JunXiang'
+```
+
+### 多行註釋
+
+```python
+"""
+你好
+這是多行註釋
+"""
+```
+
+### DocStrings
+
+* 用於解釋文檔程序，通常拿來註釋函式
+
+* Python Docstrings
+
+    ```python
+    def add(num1,num2):
+        """ 兩數之和
+
+        :param num1: 數字 1
+        :param num2: 數字 2
+        :return: 和
+        """
+        return num1 + num2
+
+    print( add.__doc__ )
+    ```
+
+* reST Docstrings
+
+    ```python
+    """
+    This is a reST style.
+
+    :param param1: this is a first param
+    :param param2: this is a second param
+    :returns: this is a description of what is returned
+    :raises keyError: raises an exception
+    """
+    ```
+
+* Google Docstrings
+
+    ```python
+    """
+    This is a groups style docs.
+
+    Parameters:
+    param1 - this is the first param
+    param2 - this is a second param
+
+    Returns:
+    This is a description of what is returned
+
+    Raises:
+    KeyError - raises an exception
+    """
+    ```
+
+* Numpydoc (Suggest !)
+
+    ```python
+    """
+    My numpydoc description of a kind
+    of very exhautive numpydoc format docstring.
+
+    Parameters
+    ----------
+    first : array_like
+    the 1st param name `first`
+    second :
+    the 2nd param
+    third : {'value', 'other'}, optional
+    the 3rd param, by default 'value'
+
+    Returns
+    -------
+    string
+    a value in a string
+
+    Raises
+    ------
+    KeyError
+    when a key error
+    OtherError
+    when an other error
+    """
+    ```

@@ -6,6 +6,19 @@
 
 * [中文版說明書](./README_中文.md)
 
+---
+
+* Outline
+    * [Code-Lay-out](#1-code-lay-out)
+        * [String](#string)
+        * [Class & Function](#class--function)
+    * [Comment](#2-comment)
+        * [One line comment](#one-line-comment)
+        * [Multiple line comment](#multiple-line-comment)
+        * [DocStrings](#docstrings)
+
+---
+
 ## 1. Code-Lay-out
 
 <details>
@@ -42,15 +55,13 @@ s = ("this is a very"
      "for sure ..."
     )
 
-# Correct:
+# Correct (PEP8 not suggest):
 s = ' this is a very \
       long string if I had the \
       energy to type more and more ..'
 ```
 
 ### Class & Function
-
-[Ref](https://github.com/googleapis/python-storage/blob/main/google/cloud/storage/client.py)
 
 ```python
 # Wrong:
@@ -76,3 +87,103 @@ def long_function_name(
     """A example"""
     print(var_one)
 ```
+
+## 2. Comment
+
+### One line Comment
+
+```python
+name = 'JunXiang' # One line Comment
+
+# One line Comment
+name = 'JunXiang'
+```
+
+### Multiple line Comment
+
+```python
+"""
+Hi
+Multiple line Comment
+"""
+```
+
+### DocStrings
+
+* Used to explain documentation programs, usually used to annotate functions
+
+* Python Docstrings
+
+    ```python
+    def add(num1,num2):
+        """ Sum of two value
+
+        :param num1: value 1
+        :param num2: value 2
+        :return: sum
+        """
+        return num1 + num2
+
+    print( add.__doc__ )
+    ```
+
+* reST Docstrings
+
+    ```python
+    """
+    This is a reST style.
+
+    :param param1: this is a first param
+    :param param2: this is a second param
+    :returns: this is a description of what is returned
+    :raises keyError: raises an exception
+    """
+    ```
+
+* Google Docstrings
+
+    ```python
+    """
+    This is a groups style docs.
+
+    Parameters:
+    param1 - this is the first param
+    param2 - this is a second param
+
+    Returns:
+    This is a description of what is returned
+
+    Raises:
+    KeyError - raises an exception
+    """
+    ```
+
+* Numpydoc (Suggest !)
+
+    ```python
+    """
+    My numpydoc description of a kind
+    of very exhautive numpydoc format docstring.
+
+    Parameters
+    ----------
+    first : array_like
+    the 1st param name `first`
+    second :
+    the 2nd param
+    third : {'value', 'other'}, optional
+    the 3rd param, by default 'value'
+
+    Returns
+    -------
+    string
+    a value in a string
+
+    Raises
+    ------
+    KeyError
+    when a key error
+    OtherError
+    when an other error
+    """
+    ```
