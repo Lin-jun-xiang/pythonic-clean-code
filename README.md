@@ -1,6 +1,6 @@
 # python-clean-code
 
-* The guidelines defined in this article are not the ultimate best practices, but rather a combination of observations from multiple projects and the organization of PEP8 style recommendations.
+* The guidelines defined in this article are not the ultimate best practices, but rather a combination of observations from multiple projects and the organization of PEP8 style recommendations. (Therefore, there're some different with PEP8.)
 
 * [Style Guide for Python Code](https://peps.python.org/pep-0008/)
 
