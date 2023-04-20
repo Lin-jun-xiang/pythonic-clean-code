@@ -1,4 +1,4 @@
-# clean-code-pep8
+# python-clean-code
 
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8...風格合併而成
 * [Style Guide for Python Code](https://peps.python.org/pep-0008/)
