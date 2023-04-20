@@ -1,4 +1,4 @@
-# clean-code-pep8
+# python-clean-code
 
 * The guidelines defined in this article are not the ultimate best practices, but rather a combination of observations from multiple projects and the organization of PEP8 style recommendations.
 
