@@ -6,6 +6,7 @@
 ---
 
 * Outline
+    * [yapf 一鍵格式化](#yapf)
     * [代碼布局](#一代碼布局)
         * [字串](#字串)
         * [類、函數](#類函數)
@@ -15,6 +16,16 @@
         * [DocStrings](#docstrings)
 
 ---
+
+## yapf
+
+* `pip install yapf`
+
+* `yapf -i main.py`
+
+* Before vs After
+
+
 
 ## 一、代碼布局
 
@@ -88,6 +99,14 @@ def long_function_name(
     var_three: Optional[str] = None,
     var_four: Optional[int] = None
 ) -> None:
+    """A example"""
+    print(var_one)
+
+# yapf
+def long_function_name(var_one: int,
+                       var_two: str = 'default',
+                       var_three: Optional[str] = None,
+                       var_four: Optional[int] = None) -> None:
     """A example"""
     print(var_one)
 ```

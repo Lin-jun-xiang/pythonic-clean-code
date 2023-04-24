@@ -9,6 +9,7 @@
 ---
 
 * Outline
+    * [yapf 一鍵格式化](#yapf)
     * [Code-Lay-out](#1-code-lay-out)
         * [String](#string)
         * [Class & Function](#class--function)
@@ -18,6 +19,16 @@
         * [DocStrings](#docstrings)
 
 ---
+
+## yapf
+
+* `pip install yapf`
+
+* `yapf -i main.py`
+
+* Before vs After
+
+
 
 ## 1. Code-Lay-out
 
@@ -84,6 +95,14 @@ def long_function_name(
     var_three: Optional[str] = None,
     var_four: Optional[int] = None
 ) -> None:
+    """A example"""
+    print(var_one)
+
+# yapf
+def long_function_name(var_one: int,
+                       var_two: str = 'default',
+                       var_three: Optional[str] = None,
+                       var_four: Optional[int] = None) -> None:
     """A example"""
     print(var_one)
 ```
