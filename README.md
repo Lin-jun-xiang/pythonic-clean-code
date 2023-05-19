@@ -128,7 +128,7 @@ def long_function_name(
     var_four):
     print(var_one)
 
-# Correct:
+# Correct: (google)
 def long_function_name(
     var_one, var_two,
     var_three, var_four
