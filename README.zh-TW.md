@@ -3,7 +3,7 @@
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8、GOOGLE...風格合併而成 (因此有些會與 PEP8 不相符)
 * [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
 * [GOOGLE: Style Guides](https://github.com/google/styleguide)
-* 建議您使用 `Pylint`, `Pylance`...等相關套件，來尋找 `bug` 與 格式化問題
+* 建議您使用 `Pylint`, `Pylance`...等相關套件，來尋找 `bug` 與格式化問題
 
 * Outline
     * [yapf 一鍵格式化](#yapf)
@@ -286,8 +286,10 @@ Comment
     * 有時候參數類型可以**同時**為 `NoneType`，例如 `a` 可以為 `str`, `int`, `NoneType`
     * 現在的標準 `annotaion` 方式有以下:
         * 顯式表達: `|`
-        * `Union`: 與顯示表達一樣，例如 `Union[str, int, None]` 表示參數有三種可能的類型
-        * `Optional`: 例如 `Optional[str]` 表示參數為字串或`NoneType`
+
+        * Union: 與顯示表達一樣，例如 `Union[str, int, None]`，表示參數有三種可能的類型
+
+        * Optional: 例如 `Optional[str]`，表示參數為字串或`NoneType`
 
             (可以用`Optional`就不要用`Union`)
 
@@ -311,7 +313,6 @@ Comment
     ```
 
 <a href="#top">Back to top</a>
-
 
 ## Import oder
 
@@ -353,4 +354,3 @@ from otherproject.ai import soul
 ```
 
 <a href="#top">Back to top</a>
-
