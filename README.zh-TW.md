@@ -3,11 +3,9 @@
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8、GOOGLE...風格合併而成 (因此有些會與 PEP8 不相符)
 * [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
 * [GOOGLE: Style Guides](https://github.com/google/styleguide)
-* 建議您使用 `Pylint`, `Pylance` 等相關套件，來尋找 `bug` 與 格式化問題
+* 建議您使用 `Pylint`, `Pylance`...等相關套件，來尋找 `bug` 與 格式化問題
 
----
-
-* Outline
+* 大綱:
     * [yapf 一鍵格式化](#yapf)
     * [代碼布局](#code-layout)
         * [字串](#string)
@@ -19,7 +17,6 @@
     * [類型註解](#type-annotation)
     * [導入順序](#import-oder)
 
----
 
 ## yapf
 
@@ -32,59 +29,61 @@
 * Before vs After
 
    * Before
-      ```python
-      import pandas as pd
 
-      class MyClass(object):
-          def __init__(self, some_value: int):
-              self.value = some_value
-          def one_more_function(self, another_value):
-              print(another_value)
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
+        ```python
+        import pandas as pd
 
-      print('ok')
-      def some_foo():
-          """
-          """
-          pass
-      ```
+        class MyClass(object):
+            def __init__(self, some_value: int):
+                self.value = some_value
+            def one_more_function(self, another_value):
+                print(another_value)
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
+
+        print('ok')
+        def some_foo():
+            """
+            """
+            pass
+        ```
    
    * After
-      ```python
-      import pandas as pd
+
+        ```python
+        import pandas as pd
 
 
-      class MyClass(object):
+        class MyClass(object):
 
-          def __init__(self, some_value: int):
-              self.value = some_value
+            def __init__(self, some_value: int):
+                self.value = some_value
 
-          def one_more_function(self, another_value):
-              print(another_value)
-
-
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
-
-      print('ok')
+            def one_more_function(self, another_value):
+                print(another_value)
 
 
-      def some_foo():
-          """
-          """
-          pass
-      ```
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
+
+        print('ok')
+
+
+        def some_foo():
+            """
+            """
+            pass
+        ```
+
 <a href="#top">Back to top</a>
 
----
 
 ## Code Layout
 
 <details>
-<summary>詳細定義</summary>
+<summary>More</summary>
 
 * Python code layout 風格通常指的是 Python 程序員在編寫 Python 程序時所遵循的程式碼風格規範，通常是指 PEP 8 規範。
 
@@ -100,7 +99,7 @@
 
   * 在類、函數和方法的定義上方留出兩行空行，在類的方法定義之間留出一行空行，在函數或方法的局部變量定義之前留出一行空行。
 
-  * 在類中，類名應該使用 **UpperCamelCase** 樣式，函數名和方法名應該使用 **lower_case_with_underscores** 樣式，變量名也應該使用 lower_case_with_underscores 樣式。
+  * 在類中，類名應該使用 **`UpperCamelCase`** 樣式，函數名和方法名應該使用 **`lower_case_with_underscores`** 樣式，變量名也應該使用 `lower_case_with_underscores` 樣式。
 
   * 對於文檔字符串使用三引號（"""）而不是單引號（''），文檔字符串應縮進一次（與程式碼縮進相同）。
 
@@ -141,6 +140,13 @@ def long_function_name(
     var_four):
     print(var_one)
 
+# Correct: (yapf)
+def long_function_name(var_one,
+                       var_two,
+                       var_three:,
+                       var_four):
+    print(var_one)
+
 # Correct: (google)
 def long_function_name(
     var_one, var_two,
@@ -152,16 +158,15 @@ def long_function_name(
 
 <a href="#top">Back to top</a>
 
----
 
 ## Comment
 
 ### One line
 
 ```python
-name = 'JunXiang' # 單行註釋
+name = 'JunXiang' # Comment
 
-# 單行註釋
+# Comment
 name = 'JunXiang'
 ```
 
@@ -169,24 +174,24 @@ name = 'JunXiang'
 
 ```python
 """
-你好
-這是多行註釋
+Hi
+Comment
 """
 ```
 
 ### DocStrings
 
 * 用於解釋文檔程序，通常拿來註釋函式
-* 如果您使用 `vscode` 編輯器，可以自動生成 DocStrings (參考[連結](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4%B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
+* 如果您使用 `vscode` 編輯器，可以自動生成 DocStrings (參考[link](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4%B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
 
-* Python Docstrings
+* `Python Docstrings`
 
     ```python
     def add(num1,num2):
-        """ 兩數之和
+        """ sum of two value
 
-        :param num1: 數字 1
-        :param num2: 數字 2
+        :param num1: value 1
+        :param num2: value 2
         :return: 和
         """
         return num1 + num2
@@ -194,7 +199,7 @@ name = 'JunXiang'
     print( add.__doc__ )
     ```
 
-* reST Docstrings
+* `reST Docstrings`
 
     ```python
     """
@@ -207,7 +212,7 @@ name = 'JunXiang'
     """
     ```
 
-* Google Docstrings
+* `Google Docstrings`
 
     ```python
     """
@@ -225,7 +230,7 @@ name = 'JunXiang'
     """
     ```
 
-* Numpydoc (Suggest !)
+* `Numpydoc` (推薦!)
 
     ```python
     """My numpydoc description of a kind
@@ -253,7 +258,6 @@ name = 'JunXiang'
 
 <a href="#top">Back to top</a>
 
----
 
 ## Type Annotation
 
@@ -261,57 +265,56 @@ name = 'JunXiang'
     * 方便理解函式參數與回傳的資料型態
     * 有時能將運行時錯誤轉變成編譯錯誤 (提升效能)
 
-```python
-# Better with "annotation and type hint": (google)
-def long_function_name(
-    var_one: int,
-    var_two: str = 'default',
-    var_three: Optional[str] = None,
-    var_four: Optional[int] = None
-) -> None:
-    """A example"""
-    print(var_one)
+    ```python
+    # Better with "annotation and type hint": (google)
+    def long_function_name(
+        var_one: int,
+        var_two: str = 'default',
+        var_three: Optional[str] = None,
+        var_four: Optional[int] = None
+    ) -> None:
+        """A example"""
+        print(var_one)
 
-# yapf
-def long_function_name(var_one: int,
-                       var_two: str = 'default',
-                       var_three: Optional[str] = None,
-                       var_four: Optional[int] = None) -> None:
-    """A example"""
-    print(var_one)
-```
+    # yapf
+    def long_function_name(var_one: int,
+                        var_two: str = 'default',
+                        var_three: Optional[str] = None,
+                        var_four: Optional[int] = None) -> None:
+        """A example"""
+        print(var_one)
+    ```
 
 * `NoneType`
     * 有時候參數類型可以**同時**為 `NoneType`，例如 `a` 可以為 `str`, `int`, `NoneType`
     * 現在的標準 `annotaion` 方式有以下:
         * 顯式表達: `|`
         * `Union`: 與顯示表達一樣，例如 `Union[str, int, None]` 表示參數有三種可能的類型
-        * `Optional`: 例如 `Optional[str]` 表示參數要馬字串或`NoneType`
+        * `Optional`: 例如 `Optional[str]` 表示參數為字串或`NoneType`
 
             (可以用`Optional`就不要用`Union`)
 
-```python
-# Wrong: don't use Union if you can use Optional
-def func(a: Union[None, str]) -> srt:
-    ...
+    ```python
+    # Wrong: don't use Union if you can use Optional
+    def func(a: Union[None, str]) -> srt:
+        ...
 
-# Wrong: implicit is not good choice (It's not recommend after PEP 484 )
-def func(a: str = None) -> str:
-    ...
+    # Wrong: implicit is not good choice (It's not recommend after PEP 484 )
+    def func(a: str = None) -> str:
+        ...
 
-# Correct: use explicit method
-def func(a: str | int | None, b: str | None = None) -> str:
-    ...
+    # Correct: use explicit method
+    def func(a: str | int | None, b: str | None = None) -> str:
+        ...
 
-# Correct: use Union and Optional
-def func(a: Union[str, int, None], b: Optional[str] = None) -> str:
-    ...
+    # Correct: use Union and Optional
+    def func(a: Union[str, int, None], b: Optional[str] = None) -> str:
+        ...
 
-```
+    ```
 
 <a href="#top">Back to top</a>
 
----
 
 ## Import oder
 
@@ -353,5 +356,3 @@ from otherproject.ai import soul
 ```
 
 <a href="#top">Back to top</a>
-
----
