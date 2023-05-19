@@ -1,27 +1,33 @@
 # python-clean-code
 
-* 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8...風格合併而成 (因此有些會與 PEP8 不相符)
-* [Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8、GOOGLE...風格合併而成 (因此有些會與 PEP8 不相符)
+* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* [GOOGLE: Style Guides](https://github.com/google/styleguide)
+* 建議您使用 `Pylint`, `Pylance` 等相關套件，來尋找 `bug` 與 格式化問題
 
 ---
 
 * Outline
     * [yapf 一鍵格式化](#yapf)
-    * [代碼布局](#一代碼布局)
-        * [字串](#字串)
-        * [類、函數](#類函數)
-    * [註釋](#二註釋)
-        * [單行註釋](#單行註釋)
-        * [多行註釋](#多行註釋)
+    * [代碼布局](#code-layout)
+        * [字串](#string)
+        * [類、函數](#classfunction)
+    * [註釋](#comment)
+        * [單行註釋](#one-line)
+        * [多行註釋](#multiple-line)
         * [DocStrings](#docstrings)
+    * [類型註解](#type-annotation)
+    * [導入順序](#import-oder)
 
 ---
 
 ## yapf
 
-* `pip install yapf`
+* 使用 `yapf` 可以快速格式化您的代碼，協同開發時建議更新完代碼使用 `yapf`
 
-* `yapf -i main.py`
+* 使用方式:
+    * `pip install yapf`
+    * `yapf -i path/file.py`
 
 * Before vs After
 
@@ -71,10 +77,11 @@
           """
           pass
       ```
+<a href="#top">Back to top</a>
 
 ---
 
-## 一、代碼布局
+## Code Layout
 
 <details>
 <summary>詳細定義</summary>
@@ -99,7 +106,7 @@
 
 </details>
 
-### 字串
+### String
 
 ```python
 # Wrong:
@@ -123,7 +130,9 @@ s = ' this is a very \
 ```
 
 
-### 類、函數
+### Class、function
+
+* 注意換行時機，如下:
 
 ```python
 # Wrong:
@@ -132,35 +141,22 @@ def long_function_name(
     var_four):
     print(var_one)
 
-# Correct:
+# Correct: (google)
 def long_function_name(
     var_one, var_two,
     var_three, var_four
 ):
     print(var_one)
 
-# Better with "annotation and type hint":
-def long_function_name(
-    var_one: int,
-    var_two: str = 'default',
-    var_three: Optional[str] = None,
-    var_four: Optional[int] = None
-) -> None:
-    """A example"""
-    print(var_one)
-
-# yapf
-def long_function_name(var_one: int,
-                       var_two: str = 'default',
-                       var_three: Optional[str] = None,
-                       var_four: Optional[int] = None) -> None:
-    """A example"""
-    print(var_one)
 ```
 
-## 二、註釋
+<a href="#top">Back to top</a>
 
-### 單行註釋
+---
+
+## Comment
+
+### One line
 
 ```python
 name = 'JunXiang' # 單行註釋
@@ -169,7 +165,7 @@ name = 'JunXiang' # 單行註釋
 name = 'JunXiang'
 ```
 
-### 多行註釋
+### Multiple line
 
 ```python
 """
@@ -255,4 +251,107 @@ name = 'JunXiang'
     """
     ```
 
-    
+<a href="#top">Back to top</a>
+
+---
+
+## Type Annotation
+
+* 善用 `type annotation`
+    * 方便理解函式參數與回傳的資料型態
+    * 有時能將運行時錯誤轉變成編譯錯誤 (提升效能)
+
+```python
+# Better with "annotation and type hint": (google)
+def long_function_name(
+    var_one: int,
+    var_two: str = 'default',
+    var_three: Optional[str] = None,
+    var_four: Optional[int] = None
+) -> None:
+    """A example"""
+    print(var_one)
+
+# yapf
+def long_function_name(var_one: int,
+                       var_two: str = 'default',
+                       var_three: Optional[str] = None,
+                       var_four: Optional[int] = None) -> None:
+    """A example"""
+    print(var_one)
+```
+
+* `NoneType`
+    * 有時候參數類型可以**同時**為 `NoneType`，例如 `a` 可以為 `str`, `int`, `NoneType`
+    * 現在的標準 `annotaion` 方式有以下:
+        * 顯式表達: `|`
+        * `Union`: 與顯示表達一樣，例如 `Union[str, int, None]` 表示參數有三種可能的類型
+        * `Optional`: 例如 `Optional[str]` 表示參數要馬字串或`NoneType`
+
+            (可以用`Optional`就不要用`Union`)
+
+```python
+# Wrong: don't use Union if you can use Optional
+def func(a: Union[None, str]) -> srt:
+    ...
+
+# Wrong: implicit is not good choice (It's not recommend after PEP 484 )
+def func(a: str = None) -> str:
+    ...
+
+# Correct: use explicit method
+def func(a: str | int | None, b: str | None = None) -> str:
+    ...
+
+# Correct: use Union and Optional
+def func(a: Union[str, int, None], b: Optional[str] = None) -> str:
+    ...
+
+```
+
+<a href="#top">Back to top</a>
+
+---
+
+## Import oder
+
+* 區塊: 導入模組順序
+    1. `Python` 標準庫 (不需要額外`pip`的模組)
+        `import os`
+
+    2. 第三方模組和包
+        `import tensorflow as tf`
+
+    3. 代碼倉庫中的子包 (自己開發的)
+        `from myproject.ai import mind`
+
+* 各區塊內部模組順序，依照字母排序
+
+* 如果您是使用 `VSCode`，您可以在編輯器中使用: 滑鼠右鍵 > 排序導入
+
+```python
+# Block 1
+import collections
+import os
+import sys
+
+# Block 2
+from absl import app
+from absl import flags
+import bs4
+import cryptography
+import tensorflow as tf
+
+# Block 3
+from myproject.backend import huxley
+from myproject.backend.hgwells import time_machine
+from myproject.backend.state_machine import main_loop
+from otherproject.ai import body
+from otherproject.ai import mind
+from otherproject.ai import soul
+
+```
+
+<a href="#top">Back to top</a>
+
+---
