@@ -1,4 +1,3 @@
-# .github/workflows/translate.yml
 name: Translate Readme
 
 on:
@@ -15,6 +14,6 @@ jobs:
                 fetch-depth: 3
 
             - name: Auto Translate
-              uses: Lin-jun-xiang/action-translate-readme@v1 # Based on the tag
+              uses: Lin-jun-xiang/action-translate-readme@v1
               with:
-                token: ${{ secrets.Action_Bot }} # Based on step2 name
+                token: ${{ secrets.Action_Bot }}
