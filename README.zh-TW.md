@@ -1,11 +1,9 @@
 # python-clean-code
 
 * 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8、GOOGLE...風格合併而成 (因此有些會與 PEP8 不相符)
-* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
-* [GOOGLE: Style Guides](https://github.com/google/styleguide)
 * 建議您使用 `Pylint`, `Pylance`...等相關套件，來尋找 `bug` 與 格式化問題
 
-* Outline
+* 大綱:
     * [yapf 一鍵格式化](#yapf)
     * [代碼布局](#code-layout)
         * [字串](#string)
@@ -16,6 +14,7 @@
         * [DocStrings](#docstrings)
     * [類型註解](#type-annotation)
     * [導入順序](#import-oder)
+    * [參考](#reference)
 
 
 ## yapf
@@ -29,58 +28,60 @@
 * Before vs After
 
    * Before
-      ```python
-      import pandas as pd
 
-      class MyClass(object):
-          def __init__(self, some_value: int):
-              self.value = some_value
-          def one_more_function(self, another_value):
-              print(another_value)
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
+        ```python
+        import pandas as pd
 
-      print('ok')
-      def some_foo():
-          """
-          """
-          pass
-      ```
+
+        class MyClass(object):
+            def __init__(self, some_value: int):
+                self.value = some_value
+            def one_more_function(self, another_value):
+                print(another_value)
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
+
+
+        def some_foo():
+            """
+            """
+            pass
+        ```
    
    * After
-      ```python
-      import pandas as pd
+
+        ```python
+        import pandas as pd
 
 
-      class MyClass(object):
+        class MyClass(object):
 
-          def __init__(self, some_value: int):
-              self.value = some_value
+            def __init__(self, some_value: int):
+                self.value = some_value
 
-          def one_more_function(self, another_value):
-              print(another_value)
-
-
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
-
-      print('ok')
+            def one_more_function(self, another_value):
+                print(another_value)
 
 
-      def some_foo():
-          """
-          """
-          pass
-      ```
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
+
+
+        def some_foo():
+            """
+            """
+            pass
+        ```
+
 <a href="#top">Back to top</a>
 
 
 ## Code Layout
 
 <details>
-<summary>詳細定義</summary>
+<summary>More</summary>
 
 * Python code layout 風格通常指的是 Python 程序員在編寫 Python 程序時所遵循的程式碼風格規範，通常是指 PEP 8 規範。
 
@@ -103,6 +104,7 @@
 </details>
 
 ### String
+* 使用 '' 或者 ""，建議統一使用 ''
 
 ```python
 # Wrong:
@@ -128,6 +130,7 @@ s = ' this is a very \
 
 ### Class、function
 
+* class、function 與其它代碼區塊皆需 "**空2行**"
 * 注意換行時機，如下:
 
 ```python
@@ -137,6 +140,7 @@ def long_function_name(
     var_four):
     print(var_one)
 
+
 # Correct: (yapf)
 def long_function_name(var_one,
                        var_two,
@@ -144,13 +148,13 @@ def long_function_name(var_one,
                        var_four):
     print(var_one)
 
+
 # Correct: (google)
 def long_function_name(
     var_one, var_two,
     var_three, var_four
 ):
     print(var_one)
-
 ```
 
 <a href="#top">Back to top</a>
@@ -185,13 +189,14 @@ Comment
 
     ```python
     def add(num1,num2):
-        """ 兩數之和
+        """ sum of two value
 
-        :param num1: 數字 1
-        :param num2: 數字 2
+        :param num1: value 1
+        :param num2: value 2
         :return: 和
         """
         return num1 + num2
+
 
     print( add.__doc__ )
     ```
@@ -263,6 +268,9 @@ Comment
     * 有時能將運行時錯誤轉變成編譯錯誤 (提升效能)
 
     ```python
+    from typing import Optional, Union
+
+
     # Better with "annotation and type hint": (google)
     def long_function_name(
         var_one: int,
@@ -272,6 +280,7 @@ Comment
     ) -> None:
         """A example"""
         print(var_one)
+
 
     # yapf
     def long_function_name(var_one: int,
@@ -329,6 +338,7 @@ Comment
 
 * 如果您是使用 `VSCode`，您可以在編輯器中使用: 滑鼠右鍵 > 排序導入
 
+* import 區塊與代碼區塊需 "**空2行**"
 ```python
 # Block 1
 import collections
@@ -350,7 +360,12 @@ from otherproject.ai import body
 from otherproject.ai import mind
 from otherproject.ai import soul
 
+
+...your code
 ```
 
 <a href="#top">Back to top</a>
 
+## Reference
+* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* [GOOGLE: Style Guides](https://github.com/google/styleguide)

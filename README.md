@@ -1,98 +1,107 @@
 # python-clean-code
 
-* The guidelines defined in this article are not the ultimate best practices, but rather a combination of observations from multiple projects and the organization of PEP8 style recommendations. (Therefore, there're some different with PEP8.)
+* The definition in this article is not the best practice, but a combination of observing multiple large projects, sorting out PEP8, and GOOGLE... style (so some may not match PEP8)
+* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* [GOOGLE: Style Guides](https://github.com/google/styleguide)
+* It is recommended that you use `Pylint`, `Pylance`... and other related packages to find `bug` and formatting problems
 
-* [Style Guide for Python Code](https://peps.python.org/pep-0008/)
-
-* [中文版說明書](./README_中文.md)
-
----
-
-* Outline
-    * [yapf 一鍵格式化](#yapf)
-    * [Code-Lay-out](#1-code-lay-out)
-        * [String](#string)
-        * [Class & Function](#class--function)
-    * [Comment](#2-comment)
-        * [One line comment](#one-line-comment)
-        * [Multiple line comment](#multiple-line-comment)
+* Outline:
+    * [yapf one-key formatting](#yapf)
+    * [code layout](#code-layout)
+        * [string](#string)
+        * [class, function](#classfunction)
+    * [Comment](#comment)
+        * [single-line comment](#one-line)
+        * [multiple-line comment](#multiple-line)
         * [DocStrings](#docstrings)
+    * [type annotation](#type-annotation)
+    * [import order](#import-oder)
 
----
 
 ## yapf
 
-* `pip install yapf`
+* Use `yapf` to quickly format your code. It is recommended to use `yapf` after updating the code during collaborative development
 
-* `yapf -i main.py`
+* How to use:
+    * `pip install yapf`
+    * `yapf -i path/file.py`
 
 * Before vs After
 
-   * Before
-      ```python
-      import pandas as pd
+* Before
 
-      class MyClass(object):
-          def __init__(self, some_value: int):
-              self.value = some_value
-          def one_more_function(self, another_value):
-              print(another_value)
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
+        ```python
+        import pandas as pd
 
-      print('ok')
-      def some_foo():
-          """
-          """
-          pass
-      ```
-   
-   * After
-      ```python
-      import pandas as pd
+        class MyClass(object):
+            def __init__(self, some_value: int):
+                self.value = some_value
+            def one_more_function(self, another_value):
+                print(another_value)
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
 
+        print('ok')
+        def some_foo():
+            """
+            """
+            pass
+        ```
 
-      class MyClass(object):
+* After
 
-          def __init__(self, some_value: int):
-              self.value = some_value
-
-          def one_more_function(self, another_value):
-              print(another_value)
+        ```python
+        import pandas as pd
 
 
-      myObject = MyClass(45)
-      myObject.one_more_function(2)
-      my__object2 = MyClass(324)
+        class MyClass(object):
 
-      print('ok')
+            def __init__(self, some_value: int):
+                self.value = some_value
+
+            def one_more_function(self, another_value):
+                print(another_value)
 
 
-      def some_foo():
-          """
-          """
-          pass
-      ```
+        myObject = MyClass(45)
+        myObject.one_more_function(2)
+        my__object2 = MyClass(324)
 
----
+        print('ok')
 
-## 1. Code-Lay-out
+
+        def some_foo():
+            """
+            """
+            pass
+        ```
+
+<a href="#top">Back to top</a>
+
+
+## Code Layout
 
 <details>
-<summary>Details</summary>
+<summary>More</summary>
 
-* Python code layout style usually refers to the code style guidelines that Python programmers follow when writing Python programs, typically referred to as the PEP 8 guidelines.
+* The Python code layout style usually refers to the code style specification that Python programmers follow when writing Python programs, usually referring to the PEP 8 specification.
 
-* Here are several PEP 8 guidelines that Python programmers usually follow:
+* Here are several PEP 8 specifications that Python programmers generally follow:
 
-  * Use 4 spaces for indentation, not tabs.
-  * Keep each line under 79 characters. For long lines, break them at parentheses and indent the continuation line with an additional 4 spaces.
-  * Use spaces around binary operators, such as a + b.
-  * Put commas at the end of the last item in a sequence, rather than on the next line. This makes it easier for version control systems to compare differences.
-  * Leave two blank lines before class, function, and method definitions. Leave one blank line between methods in a class. Leave one blank line before defining local variables in a function or method.
-  * Use UpperCamelCase style for class names, lower_case_with_underscores style for function and method names, and lower_case_with_underscores style for variable names.
-  * Use triple quotes (""") for docstrings instead of single quotes (''). Docstrings should be indented the same as the code.
+* Use 4 spaces for indentation. Do not use tab characters.
+
+* No more than **79** characters per line. Long lines should be wrapped within parentheses and indented 4 spaces on the next line.
+
+* Separate binary operators with spaces, e.g. **a + b**.
+
+* puts the comma after the last element instead of at the beginning of the next line. This allows version control systems to better compare differences.
+
+* Leave two blank lines above definitions of classes, functions, and methods, one blank line between method definitions of classes, and one blank line before local variable definitions of functions or methods.
+
+* In a class, the class name should use the **`UpperCamelCase`** style, the function name and method name should use the **`lower_case_with_underscores`** style, and the variable name should also use the `lower_case_with_underscores` style.
+
+* Use triple quotes (""") instead of single quotes ('') for docstrings, and docstrings should be indented once (same as code indentation).
 
 </details>
 
@@ -114,18 +123,28 @@ s = ("this is a very"
     )
 
 # Correct (PEP8 not suggest):
-s = ' this is a very \
-      long string if I had the \
+s = ' this is a very \/
+      long string if I had the \/
       energy to type more and more ..'
 ```
 
-### Class & Function
+
+### Class、function
+
+* Pay attention to the timing of line breaks, as follows:
 
 ```python
 # Wrong:
 def long_function_name(
     var_one, var_two, var_three,
     var_four):
+    print(var_one)
+
+# Correct: (yapf)
+def long_function_name(var_one,
+                       var_two,
+                       var_three:,
+                       var_four):
     print(var_one)
 
 # Correct: (google)
@@ -135,65 +154,52 @@ def long_function_name(
 ):
     print(var_one)
 
-# Better with "annotation and type hint":
-def long_function_name(
-    var_one: int,
-    var_two: str = 'default',
-    var_three: Optional[str] = None,
-    var_four: Optional[int] = None
-) -> None:
-    """A example"""
-    print(var_one)
-
-# yapf
-def long_function_name(var_one: int,
-                       var_two: str = 'default',
-                       var_three: Optional[str] = None,
-                       var_four: Optional[int] = None) -> None:
-    """A example"""
-    print(var_one)
 ```
 
-## 2. Comment
+<a href="#top">Back to top</a>
 
-### One line Comment
+
+## Comment
+
+### One line
 
 ```python
-name = 'JunXiang' # One line Comment
+name = 'JunXiang' # Comment
 
-# One line Comment
+# Comment
 name = 'JunXiang'
 ```
 
-### Multiple line Comment
+### Multiple line
 
 ```python
 """
 Hi
-Multiple line Comment
+Comment
 """
 ```
 
 ### DocStrings
 
 * Used to explain documentation programs, usually used to annotate functions
-* * If you use the `vscode` editor, you can automatically generate DocStrings (see [link](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator))
-* Python Docstrings
+* If you use the `vscode` editor, DocStrings can be automatically generated (refer to [link](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4% B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
+
+* `Python Docstrings`
 
     ```python
     def add(num1,num2):
-        """ Sum of two value
+        """ sum of two value
 
         :param num1: value 1
         :param num2: value 2
-        :return: sum
+        :return: 和
         """
         return num1 + num2
 
     print( add.__doc__ )
     ```
 
-* reST Docstrings
+* `reST Docstrings`
 
     ```python
     """
@@ -206,7 +212,7 @@ Multiple line Comment
     """
     ```
 
-* Google Docstrings
+* `Google Docstrings`
 
     ```python
     """
@@ -224,7 +230,7 @@ Multiple line Comment
     """
     ```
 
-* Numpydoc (Suggest !)
+* `Numpydoc` (recommended!)
 
     ```python
     """My numpydoc description of a kind
@@ -249,3 +255,104 @@ Multiple line Comment
     when an other error
     """
     ```
+
+<a href="#top">Back to top</a>
+
+
+## Type Annotation
+
+* Make good use of `type annotation`
+    * facilitates the understanding of function parameters and returned data types
+    * can sometimes turn runtime errors into compile errors (improves performance)
+
+    ```python
+    # Better with "annotation and type hint": (google)
+    def long_function_name(
+        var_one: int,
+        var_two: str = 'default',
+        var_three: Optional[str] = None,
+        var_four: Optional[int] = None
+    ) -> None:
+        """A example"""
+        print(var_one)
+
+    # yapf
+    def long_function_name(var_one: int,
+                        var_two: str = 'default',
+                        var_three: Optional[str] = None,
+                        var_four: Optional[int] = None) -> None:
+        """A example"""
+        print(var_one)
+    ```
+
+* `NoneType`
+    * Sometimes the parameter type can **both** be `NoneType`, for example `a` can be `str`, `int`, `NoneType`
+    * now has the following standard `annotaion` methods:
+        * explicit expression: `|`
+        * `Union`: Same as the display expression, for example `Union[str, int, None]` indicates that the parameter has three possible types
+        * `Optional`: For example, `Optional[str]` indicates that the parameter is a string or `NoneType`
+
+             (if you can use `Optional`, don’t use `Union`)
+
+    ```python
+    # Wrong: don't use Union if you can use Optional
+    def func(a: Union[None, str]) -> srt:
+        ...
+
+    # Wrong: implicit is not good choice (It's not recommend after PEP 484 )
+    def func(a: str = None) -> str:
+        ...
+
+    # Correct: use explicit method
+    def func(a: str | int | None, b: str | None = None) -> str:
+        ...
+
+    # Correct: use Union and Optional
+    def func(a: Union[str, int, None], b: Optional[str] = None) -> str:
+        ...
+
+    ```
+
+<a href="#top">Back to top</a>
+
+
+## Import oder
+
+* Blocks: import module order
+    1. `Python` standard library (no additional `pip` mods required)
+        `import os`
+
+    2. 3rd party mods and packs
+        `import tensorflow as tf`
+
+    3. Subpackages in the code warehouse (developed by myself)
+        `from myproject.ai import mind`
+
+* The order of modules inside each block is sorted alphabetically
+
+* If you are using `VSCode`, you can use in the editor: right mouse button > sort import
+
+```python
+# Block 1
+import collections
+import os
+import sys
+
+# Block 2
+from absl import app
+from absl import flags
+import bs4
+import cryptography
+import tensorflow as tf
+
+# Block 3
+from myproject.backend import huxley
+from myproject.backend.hgwells import time_machine
+from myproject.backend.state_machine import main_loop
+from otherproject.ai import body
+from otherproject.ai import mind
+from otherproject.ai import soul
+
+```
+
+<a href="#top">Back to top</a>
