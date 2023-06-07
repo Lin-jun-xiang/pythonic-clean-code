@@ -1,33 +1,40 @@
 # python-clean-code
+[中文版](README.zh-TW.md) | [English](README.md)
 
-* The definition in this article is not the best practice, but a combination of observing multiple large projects, sorting out PEP8, and GOOGLE... style (so some may not match PEP8)
-* It is recommended that you use `Pylint`, `Pylance`... and other related packages to find `bug` and formatting problems
+* The definition in this article is not the best practice, but combined with the observation of multiple large-scale projects, sorting out PEP8, GOOGLE... style (so some may not conform to PEP8)
+* It is recommended to use `Pylint`, `Pylance`... and other related packages to find `bug` and format problems
 
 * Outline:
     * [yapf one-key formatting](#yapf)
     * [code layout](#code-layout)
         * [string](#string)
         * [class, function](#classfunction)
-    * [Comment](#comment)
+    * [comment](#comment)
         * [single-line comment](#one-line)
         * [multiple-line comment](#multiple-line)
-        * [DocStrings](#docstrings)
+        * [docstrings](#docstrings)
     * [type annotation](#type-annotation)
     * [import order](#import-oder)
     * [reference](#reference)
 
 
-## yapf
+## [yapf](https://github.com/google/yapf)
 
-* Use `yapf` to quickly format your code. It is recommended to use `yapf` after updating the code during collaborative development
+* Use `yapf` to quickly format your code . It is recommended to use `yapf` after collaborative development to update the code
 
-* How to use:
+* how to use:
     * `pip install yapf`
-    * `yapf -i path/file.py`
+    * `yapf -i path/file.py --style='google'`
+    
+     **style** contains:
+     * `pep8` (default)
+     * `google`
+     * `yapf`
+     * `facebook`
 
-* Before vs After
+* before and after
 
-* Before
+* forward
 
         ```python
         import pandas as pd
@@ -49,7 +56,7 @@
             pass
         ```
 
-* After
+* back
 
         ```python
         import pandas as pd
@@ -83,23 +90,23 @@
 <details>
 <summary>More</summary>
 
-* The Python code layout style usually refers to the code style specification that Python programmers follow when writing Python programs, usually referring to the PEP 8 specification.
+* Python code layout style usually refers to the code style specification that Python programmers follow when writing Python programs, usually refers to the PEP 8 specification .
 
-* Here are several PEP 8 specifications that Python programmers generally follow:
+* The following are several PEP 8 specifications commonly followed by Python programmers:
 
-* Use 4 spaces for indentation. Do not use tab characters.
+* Use 4 spaces for indentation . do not use tabs .
 
-* No more than **79** characters per line. Long lines should be wrapped within parentheses and indented 4 spaces on the next line.
+* No more than **79** characters per line . Long lines should be enclosed in parentheses and indented 4 spaces on the next line .
 
 * Separate binary operators with spaces, e.g. **a + b**.
 
-* puts the comma after the last element instead of at the beginning of the next line. This allows version control systems to better compare differences.
+* Put the comma after the last element instead of the beginning of the next line . This allows version control systems to better compare diffs .
 
-* Leave two blank lines above definitions of classes, functions, and methods, one blank line between method definitions of classes, and one blank line before local variable definitions of functions or methods.
+* There are two blank lines above the definitions of classes, functions, and methods, one blank line between class method definitions, and one blank line before the local variable definitions of functions or methods.
 
-* In a class, the class name should use the **`UpperCamelCase`** style, the function name and method name should use the **`lower_case_with_underscores`** style, and the variable name should also use the `lower_case_with_underscores` style.
+* In a class, class name should use **`UpperCamelCase`** style, function name and method name should use **`lower_case_with_underscores`** style, variable name should also use `lower_case_with_underscores` style .
 
-* Use triple quotes (""") instead of single quotes ('') for docstrings, and docstrings should be indented once (same as code indentation).
+* Use triple quotes (""") instead of single quotes ('') for docstrings, and docstrings should be indented once (same as code indentation) .
 
 </details>
 
@@ -122,15 +129,15 @@ s = ("this is a very"
     )
 
 # Correct (PEP8 not suggest):
-s = ' this is a very \/
-      long string if I had the \/
+s = ' this is a very \///
+      long string if I had the \///
       energy to type more and more ..'
 ```
 
 
 ### Class、function
 
-* class, function and other code blocks all need "**empty 2 lines**"
+* Code blocks such as classes and functions require "**empty 2 lines**"
 * Pay attention to the timing of line breaks, as follows:
 
 ```python
@@ -183,9 +190,9 @@ Comment
 ### DocStrings
 
 * Used to explain documentation programs, usually used to annotate functions
-* If you use the `vscode` editor, DocStrings can be automatically generated (refer to [link](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4% B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
+* If you use the `vscode` editor, DocStrings can be automatically generated (refer to [link](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator ))
 
-* `Python Docstrings`
+* `DocStrings example`
 
     ```python
     def add(num1,num2):
@@ -201,7 +208,7 @@ Comment
     print( add.__doc__ )
     ```
 
-* `reST Docstrings`
+* `reST`
 
     ```python
     """
@@ -214,7 +221,7 @@ Comment
     """
     ```
 
-* `Google Docstrings`
+* `Google`
 
     ```python
     """
@@ -264,7 +271,7 @@ Comment
 ## Type Annotation
 
 * Make good use of `type annotation`
-    * facilitates the understanding of function parameters and returned data types
+    * is convenient for understanding function parameters and return data types
     * can sometimes turn runtime errors into compile errors (improves performance)
 
     ```python
@@ -291,14 +298,14 @@ Comment
         print(var_one)
     ```
 
-* `NoneType`
-    * Sometimes the parameter type can **both** be `NoneType`, for example `a` can be `str`, `int`, `NoneType`
-    * now has the following standard `annotaion` methods:
+* `Optional` and `Union`
+    * Sometimes the parameter type can be **both** `NoneType`, for example `a` can be `str`, `int`, `NoneType`
+    * now have the following standard `annotaion` methods:
         * explicit expression: `|`
-        * `Union`: Same as the display expression, for example `Union[str, int, None]` indicates that the parameter has three possible types
+        * `Union`: Same as the display expression, for example, `Union[str, int, None]` indicates that there are three possible types of parameters
         * `Optional`: For example, `Optional[str]` indicates that the parameter is a string or `NoneType`
 
-             (if you can use `Optional`, don’t use `Union`)
+             (if you can use `Optional`, don't use `Union`)
 
     ```python
     # Wrong: don't use Union if you can use Optional
@@ -325,20 +332,20 @@ Comment
 ## Import oder
 
 * Blocks: import module order
-    1. `Python` standard library (no additional `pip` mods required)
+    1. `Python` standard library (no extra `pip` modules required)
         `import os`
 
     2. 3rd party mods and packs
         `import tensorflow as tf`
 
-    3. Subpackages in the code warehouse (developed by myself)
+3. Subcontracts in the code warehouse (developed by myself)
         `from myproject.ai import mind`
 
-* The order of modules inside each block is sorted alphabetically
+* Module order within each block is sorted alphabetically
 
 * If you are using `VSCode`, you can use in the editor: right mouse button > sort import
 
-* import block and code block need "**2 blank lines**"
+* Import blocks and code blocks require "**2 blank lines**"
 ```python
 # Block 1
 import collections
@@ -367,5 +374,5 @@ from otherproject.ai import soul
 <a href="#top">Back to top</a>
 
 ## Reference
-* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
-* [GOOGLE: Style Guides](https://github.com/google/styleguide)
+* [PEP8:Python Code Style Guide](https://peps.python.org/pep-0008/)
+* [GOOGLE:styleguide](https://github.com/google/styleguide)
