@@ -1,8 +1,6 @@
 # python-clean-code
 
 * The definition in this article is not the best practice, but a combination of observing multiple large projects, sorting out PEP8, and GOOGLE... style (so some may not match PEP8)
-* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
-* [GOOGLE: Style Guides](https://github.com/google/styleguide)
 * It is recommended that you use `Pylint`, `Pylance`... and other related packages to find `bug` and formatting problems
 
 * Outline:
@@ -16,6 +14,7 @@
         * [DocStrings](#docstrings)
     * [type annotation](#type-annotation)
     * [import order](#import-oder)
+    * [reference](#reference)
 
 
 ## yapf
@@ -33,6 +32,7 @@
         ```python
         import pandas as pd
 
+
         class MyClass(object):
             def __init__(self, some_value: int):
                 self.value = some_value
@@ -42,7 +42,7 @@
         myObject.one_more_function(2)
         my__object2 = MyClass(324)
 
-        print('ok')
+
         def some_foo():
             """
             """
@@ -67,8 +67,6 @@
         myObject = MyClass(45)
         myObject.one_more_function(2)
         my__object2 = MyClass(324)
-
-        print('ok')
 
 
         def some_foo():
@@ -106,6 +104,7 @@
 </details>
 
 ### String
+* Use '' or "", it is recommended to use '' uniformly
 
 ```python
 # Wrong:
@@ -131,6 +130,7 @@ s = ' this is a very \/
 
 ### Class、function
 
+* class, function and other code blocks all need "**empty 2 lines**"
 * Pay attention to the timing of line breaks, as follows:
 
 ```python
@@ -140,6 +140,7 @@ def long_function_name(
     var_four):
     print(var_one)
 
+
 # Correct: (yapf)
 def long_function_name(var_one,
                        var_two,
@@ -147,13 +148,13 @@ def long_function_name(var_one,
                        var_four):
     print(var_one)
 
+
 # Correct: (google)
 def long_function_name(
     var_one, var_two,
     var_three, var_four
 ):
     print(var_one)
-
 ```
 
 <a href="#top">Back to top</a>
@@ -195,6 +196,7 @@ Comment
         :return: 和
         """
         return num1 + num2
+
 
     print( add.__doc__ )
     ```
@@ -266,6 +268,9 @@ Comment
     * can sometimes turn runtime errors into compile errors (improves performance)
 
     ```python
+    from typing import Optional, Union
+
+
     # Better with "annotation and type hint": (google)
     def long_function_name(
         var_one: int,
@@ -275,6 +280,7 @@ Comment
     ) -> None:
         """A example"""
         print(var_one)
+
 
     # yapf
     def long_function_name(var_one: int,
@@ -332,6 +338,7 @@ Comment
 
 * If you are using `VSCode`, you can use in the editor: right mouse button > sort import
 
+* import block and code block need "**2 blank lines**"
 ```python
 # Block 1
 import collections
@@ -353,6 +360,12 @@ from otherproject.ai import body
 from otherproject.ai import mind
 from otherproject.ai import soul
 
+
+...your code
 ```
 
 <a href="#top">Back to top</a>
+
+## Reference
+* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* [GOOGLE: Style Guides](https://github.com/google/styleguide)

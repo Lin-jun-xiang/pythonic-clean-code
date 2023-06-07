@@ -1,17 +1,17 @@
 # python-clean-code
 
-* 本文所定義的並非最佳規範，而是觀察多個大型專案、整理PEP8、GOOGLE...風格合併而成 (因此有些會與 PEP8 不相符)
-* 建議您使用 `Pylint`, `Pylance`...等相關套件，來尋找 `bug` 與 格式化問題
+* 本文中的定義不是最佳實踐,而是結合觀察多個大型項目,整理出PEP8,GOOGLE...風格(所以有些可能不符合PEP8)
+* 推薦使用`Pylint`、`Pylance`...等相關包查找`bug`和格式問題
 
 * 大綱:
     * [yapf 一鍵格式化](#yapf)
-    * [代碼布局](#code-layout)
-        * [字串](#string)
-        * [類、函數](#classfunction)
-    * [註釋](#comment)
+    * [代碼佈局](#code-layout)
+        * [字符串](#string)
+        * [類,函數](#classfunction)
+    * [評論](#comment)
         * [單行註釋](#one-line)
         * [多行註釋](#multiple-line)
-        * [DocStrings](#docstrings)
+        * [文檔字符串](#docstrings)
     * [類型註解](#type-annotation)
     * [導入順序](#import-oder)
     * [參考](#reference)
@@ -19,15 +19,15 @@
 
 ## yapf
 
-* 使用 `yapf` 可以快速格式化您的代碼，協同開發時建議更新完代碼使用 `yapf`
+* 使用`yapf` 快速格式化你的代碼. 協同開發更新代碼後推薦使用`yapf`
 
-* 使用方式:
+* 如何使用:
     * `pip install yapf`
     * `yapf -i path/file.py`
 
-* Before vs After
+* 之前與之後
 
-   * Before
+* 前
 
         ```python
         import pandas as pd
@@ -48,8 +48,8 @@
             """
             pass
         ```
-   
-   * After
+
+* 後
 
         ```python
         import pandas as pd
@@ -83,28 +83,28 @@
 <details>
 <summary>More</summary>
 
-* Python code layout 風格通常指的是 Python 程序員在編寫 Python 程序時所遵循的程式碼風格規範，通常是指 PEP 8 規範。
+* Python代碼佈局風格通常是指Python程序員在編寫Python程序時所遵循的代碼風格規範,通常是指PEP 8規範.
 
-* 下面是 Python 程序員通常遵循的幾種 PEP 8 規範：
+* 以下是 Python 程序員普遍遵循的幾個 PEP 8 規範:
 
-  * 使用 4 個空格作為縮進。不要使用 tab 字符。
+* 縮進使用4個空格.不要使用製表符.
 
-  * 每行不超過 **79** 字符。對於長行，應當在括號內進行折行，並在下一行縮進 4 個空格。
+* 每行不超過 **79** 個字符. 長行應包含在括號內並在下一行縮進 4 個空格.
 
-  * 使用空格將二元運算符隔開，例如 **a + b**。
+* 用空格分隔二元運算符,e.g. **a + b**.
 
-  * 將逗號放在最後一個元素的後面，而不是在下一行開始。這樣可以讓版本控制系統更好地比較差異。
+* 將逗號放在最後一個元素之後而不是下一行的開頭. 這允許版本控制系統更好地比較差異.
 
-  * 在類、函數和方法的定義上方留出兩行空行，在類的方法定義之間留出一行空行，在函數或方法的局部變量定義之前留出一行空行。
+* 類、函數、方法的定義上方空兩行,類的方法定義之間空一行,函數或方法的局部變量定義前空一行.
 
-  * 在類中，類名應該使用 **`UpperCamelCase`** 樣式，函數名和方法名應該使用 **`lower_case_with_underscores`** 樣式，變量名也應該使用 `lower_case_with_underscores` 樣式。
+* 在一個類中,類名應該使用**`UpperCamelCase`**風格,函數名和方法名應該使用**`lower_case_with_underscores`**風格,變量名也應該使用`lower_case_with_underscores`風格.
 
-  * 對於文檔字符串使用三引號（"""）而不是單引號（''），文檔字符串應縮進一次（與程式碼縮進相同）。
+* 對文檔字符串使用三引號(""")而不是單引號(''),並且文檔字符串應該縮進一次(與代碼縮進相同).
 
 </details>
 
 ### String
-* 使用 '' 或者 ""，建議統一使用 ''
+* 使用''或"",建議統一使用''
 
 ```python
 # Wrong:
@@ -122,16 +122,16 @@ s = ("this is a very"
     )
 
 # Correct (PEP8 not suggest):
-s = ' this is a very \
-      long string if I had the \
+s = ' this is a very \//
+      long string if I had the \//
       energy to type more and more ..'
 ```
 
 
 ### Class、function
 
-* class、function 與其它代碼區塊皆需 "**空2行**"
-* 注意換行時機，如下:
+* 類、函數等代碼塊都需要“**空2行**”
+* 注意換行的時機,如下:
 
 ```python
 # Wrong:
@@ -182,10 +182,10 @@ Comment
 
 ### DocStrings
 
-* 用於解釋文檔程序，通常拿來註釋函式
-* 如果您使用 `vscode` 編輯器，可以自動生成 DocStrings (參考[link](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_%E4%B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
+* 用於解釋文檔程序,通常用於註釋函數
+* 如果使用`vscode`編輯器,可以自動生成DocStrings(參考[鏈接](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_% E4% B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
 
-* `Python Docstrings`
+* %_內聯代碼_%
 
     ```python
     def add(num1,num2):
@@ -201,7 +201,7 @@ Comment
     print( add.__doc__ )
     ```
 
-* `reST Docstrings`
+* %_內聯代碼_%
 
     ```python
     """
@@ -214,7 +214,7 @@ Comment
     """
     ```
 
-* `Google Docstrings`
+* %_內聯代碼_%
 
     ```python
     """
@@ -232,7 +232,7 @@ Comment
     """
     ```
 
-* `Numpydoc` (推薦!)
+* `Numpydoc`(推薦！)
 
     ```python
     """My numpydoc description of a kind
@@ -264,8 +264,8 @@ Comment
 ## Type Annotation
 
 * 善用 `type annotation`
-    * 方便理解函式參數與回傳的資料型態
-    * 有時能將運行時錯誤轉變成編譯錯誤 (提升效能)
+    * 方便理解函數參數和返回數據類型
+    * 有時可以將運行時錯誤轉化為編譯錯誤(提高性能)
 
     ```python
     from typing import Optional, Union
@@ -291,14 +291,14 @@ Comment
         print(var_one)
     ```
 
-* `NoneType`
-    * 有時候參數類型可以**同時**為 `NoneType`，例如 `a` 可以為 `str`, `int`, `NoneType`
-    * 現在的標準 `annotaion` 方式有以下:
-        * 顯式表達: `|`
-        * `Union`: 與顯示表達一樣，例如 `Union[str, int, None]` 表示參數有三種可能的類型
-        * `Optional`: 例如 `Optional[str]` 表示參數為字串或`NoneType`
+* %_內聯代碼_%
+    * 有時參數類型可以**兩者**都是 `NoneType`,例如 `a` 可以是 `str`、`int`、`NoneType`
+    * 現在有以下標準的 `annotaion` 方法:
+        * 顯式表達式:`|`
+        * `Union`:與顯示表達式相同,例如`Union[str, int, None]`表示參數有三種可能的類型
+        * `Optional`:比如`Optional[str]`表示參數是字符串或者`NoneType`
 
-            (可以用`Optional`就不要用`Union`)
+            (如果可以使用`Optional`,就不要使用`Union`)
 
     ```python
     # Wrong: don't use Union if you can use Optional
@@ -324,21 +324,21 @@ Comment
 
 ## Import oder
 
-* 區塊: 導入模組順序
-    1. `Python` 標準庫 (不需要額外`pip`的模組)
+* Blocks:導入模塊順序
+    1. `Python` 標準庫(不需要額外的 `pip` 模組)
         `import os`
 
-    2. 第三方模組和包
+    2. 第 3 方模組和包
         `import tensorflow as tf`
 
-    3. 代碼倉庫中的子包 (自己開發的)
+代碼倉庫裡的    3.分包(自己開發的)
         `from myproject.ai import mind`
 
-* 各區塊內部模組順序，依照字母排序
+* 每個塊內的模塊順序按字母順序排序
 
-* 如果您是使用 `VSCode`，您可以在編輯器中使用: 滑鼠右鍵 > 排序導入
+* 如果你使用的是`VSCode`,你可以在編輯器中使用:鼠標右鍵>排序導入
 
-* import 區塊與代碼區塊需 "**空2行**"
+* 導入塊和代碼塊需要“**2個空行**”
 ```python
 # Block 1
 import collections
@@ -367,5 +367,5 @@ from otherproject.ai import soul
 <a href="#top">Back to top</a>
 
 ## Reference
-* [PEP8: Style Guide for Python Code](https://peps.python.org/pep-0008/)
-* [GOOGLE: Style Guides](https://github.com/google/styleguide)
+* [PEP8:Python 代碼風格指南](https://peps.python.org/pep-0008/)
+* [GOOGLE:風格指南](https://github.com/google/styleguide)
