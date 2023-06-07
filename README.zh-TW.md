@@ -1,4 +1,5 @@
 # python-clean-code
+[中文版](README.zh-TW.md) | [English](README.md)
 
 * 本文中的定義不是最佳實踐,而是結合觀察多個大型項目,整理出PEP8,GOOGLE...風格(所以有些可能不符合PEP8)
 * 推薦使用`Pylint`、`Pylance`...等相關包查找`bug`和格式問題
@@ -17,17 +18,23 @@
     * [參考](#reference)
 
 
-## yapf
+## [yapf](https://github.com/google/yapf)
 
 * 使用`yapf` 快速格式化你的代碼. 協同開發更新代碼後推薦使用`yapf`
 
 * 如何使用:
     * `pip install yapf`
-    * `yapf -i path/file.py`
+    * `yapf -i path/file.py --style='google'`
+      
+      **style** 包含:
+      * `pep8`(default)
+      * `google`
+      * `yapf`
+      * `facebook`
 
 * 之前與之後
 
-* 前
+   * 前
 
         ```python
         import pandas as pd
@@ -49,7 +56,7 @@
             pass
         ```
 
-* 後
+   * 後
 
         ```python
         import pandas as pd
@@ -183,9 +190,9 @@ Comment
 ### DocStrings
 
 * 用於解釋文檔程序,通常用於註釋函數
-* 如果使用`vscode`編輯器,可以自動生成DocStrings(參考[鏈接](https://github.com/Lin-jun-xiang/vscode-extensions-best/blob/main/README_% E4% B8%AD%E6%96%87.md#autodocstring---python-docstring-generator))
+* 如果使用`vscode`編輯器,可以自動生成DocStrings(參考[鏈接](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator))
 
-* %_內聯代碼_%
+* `DocStrings example`
 
     ```python
     def add(num1,num2):
@@ -201,7 +208,7 @@ Comment
     print( add.__doc__ )
     ```
 
-* %_內聯代碼_%
+* `reST`
 
     ```python
     """
@@ -214,7 +221,7 @@ Comment
     """
     ```
 
-* %_內聯代碼_%
+* `Google`
 
     ```python
     """
@@ -291,7 +298,7 @@ Comment
         print(var_one)
     ```
 
-* %_內聯代碼_%
+* `Optional` and `Union`
     * 有時參數類型可以**兩者**都是 `NoneType`,例如 `a` 可以是 `str`、`int`、`NoneType`
     * 現在有以下標準的 `annotaion` 方法:
         * 顯式表達式:`|`
@@ -331,7 +338,7 @@ Comment
     2. 第 3 方模組和包
         `import tensorflow as tf`
 
-代碼倉庫裡的    3.分包(自己開發的)
+   3. 代碼倉庫裡的分包(自己開發的)
         `from myproject.ai import mind`
 
 * 每個塊內的模塊順序按字母順序排序
