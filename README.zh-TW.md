@@ -9,7 +9,7 @@
     * [代碼佈局](#code-layout)
         * [字符串](#string)
         * [類,函數](#classfunction)
-    * [評論](#comment)
+    * [註釋](#comment)
         * [單行註釋](#one-line)
         * [多行註釋](#multiple-line)
         * [文檔字符串](#docstrings)
@@ -137,7 +137,7 @@ s = ' this is a very \//
 
 ### Class、function
 
-* 類、函數等代碼塊都需要“**空2行**”
+* 類、函數等代碼塊都需要“**空2行**”。同一個類底下的函數代碼快只需要"**空1行**"
 * 注意換行的時機,如下:
 
 ```python
@@ -338,7 +338,7 @@ Comment
     2. 第 3 方模組和包
         `import tensorflow as tf`
 
-   3. 代碼倉庫裡的分包(自己開發的)
+    3. 代碼倉庫裡的分包(自己開發的)
         `from myproject.ai import mind`
 
 * 每個塊內的模塊順序按字母順序排序
@@ -376,3 +376,5 @@ from otherproject.ai import soul
 ## Reference
 * [PEP8:Python 代碼風格指南](https://peps.python.org/pep-0008/)
 * [GOOGLE:風格指南](https://github.com/google/styleguide)
+
+<a href="#top">Back to top</a>
