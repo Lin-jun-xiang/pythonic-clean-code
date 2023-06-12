@@ -9,7 +9,7 @@
     * [code layout](#code-layout)
         * [string](#string)
         * [class, function](#classfunction)
-    * [comment](#comment)
+    * [Comment](#comment)
         * [single-line comment](#one-line)
         * [multiple-line comment](#multiple-line)
         * [docstrings](#docstrings)
@@ -137,7 +137,7 @@ s = ' this is a very \///
 
 ### Class、function
 
-* Code blocks such as classes and functions require "**empty 2 lines**"
+* Code blocks such as classes and functions require "**empty 2 lines**". The function codes under the same class only need "**empty 1 line**"
 * Pay attention to the timing of line breaks, as follows:
 
 ```python
@@ -338,7 +338,7 @@ Comment
     2. 3rd party mods and packs
         `import tensorflow as tf`
 
-3. Subcontracts in the code warehouse (developed by myself)
+    3. Subcontracts in the code warehouse (developed by myself)
         `from myproject.ai import mind`
 
 * Module order within each block is sorted alphabetically
@@ -376,3 +376,5 @@ from otherproject.ai import soul
 ## Reference
 * [PEP8:Python Code Style Guide](https://peps.python.org/pep-0008/)
 * [GOOGLE:styleguide](https://github.com/google/styleguide)
+
+<a href="#top">Back to top</a>
