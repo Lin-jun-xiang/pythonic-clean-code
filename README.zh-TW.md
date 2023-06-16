@@ -1,13 +1,10 @@
 # python-clean-code
 [中文版](README.zh-TW.md) | [English](README.md)
 
-* 本文中的定義不是最佳實踐,而是結合觀察多個大型項目,整理出PEP8,GOOGLE...風格(所以有些可能不符合PEP8)
-* 推薦使用`Pylint`、`Pylance`...等相關包查找`bug`和格式問題
-
 * 大綱:
+    * [介紹](#introduction)
     * [yapf 一鍵格式化](#yapf)
     * [代碼佈局](#code-layout)
-        * [字符串](#string)
         * [類,函數](#classfunction)
     * [註釋](#comment)
         * [單行註釋](#one-line)
@@ -15,7 +12,18 @@
         * [文檔字符串](#docstrings)
     * [類型註解](#type-annotation)
     * [導入順序](#import-oder)
+    * [字串](#string)
+    * [命名](#naming)
+    * [設計模式](./design-pattern/)
     * [參考](#reference)
+
+## Introduction
+* 本文目的是希望精進 Python Code 能力，讓自己寫的代碼更炫泡、可重用、可維護、高易讀性
+* 本文中的所述並非最佳實踐，而是結合觀察多個大型項目整理。
+* 本文會講述到
+    * python 代碼風格
+    * python 設計模式
+* 推薦使用`Pylint`、`Pylance`...等相關包查找`bug`和格式問題
 
 
 ## [yapf](https://github.com/google/yapf)
@@ -109,30 +117,6 @@
 * 對文檔字符串使用三引號(""")而不是單引號(''),並且文檔字符串應該縮進一次(與代碼縮進相同).
 
 </details>
-
-### String
-* 使用''或"",建議統一使用''
-
-```python
-# Wrong:
-s ='this is a very long string if I had the energy to type more and more ...'
-
-# Correct:
-s = """ this is a very
-        long string if I had the
-        energy to type more and more ..."""
-
-# Correct:
-s = ("this is a very"
-     "long string too"
-     "for sure ..."
-    )
-
-# Correct (PEP8 not suggest):
-s = ' this is a very \//
-      long string if I had the \//
-      energy to type more and more ..'
-```
 
 
 ### Class、function
@@ -372,6 +356,90 @@ from otherproject.ai import soul
 ```
 
 <a href="#top">Back to top</a>
+
+
+## String
+
+* 使用''或"",建議統一使用''
+
+```python
+# Wrong:
+s ='this is a very long string if I had the energy to type more and more ...'
+
+# Correct:
+s = """ this is a very
+        long string if I had the
+        energy to type more and more ..."""
+
+# Correct:
+s = ("this is a very"
+     "long string too"
+     "for sure ..."
+    )
+
+# Correct (PEP8 not suggest):
+s = ' this is a very \//
+      long string if I had the \//
+      energy to type more and more ..'
+```
+
+* 应该用 `f-string`、 `%` 运算符或 `format` 方法来格式化字符串。
+    即使所有参数都是字符串，也如此。你可以自行评判合适的选项. 可以用 + 实现单次拼接, 但是"**不要用 + 实现格式化**"。
+
+```python
+# Correct
+x = f'名称: {name}; 分数: {n}'
+x = '%s, %s!' % (imperative, expletive)
+x = '{}, {}'.format(first, second)
+x = '名称: %s; 分数: %d' % (name, n)
+x = '名称: %(name)s; 分数: %(score)d' % {'name':name, 'score':n}
+x = '名称: {}; 分数: {}'.format(name, n)
+x = a + b
+
+# Wrong
+x = first + ', ' + second
+x = '名称: ' + name + '; 分数: ' + str(n)
+```
+
+* 不要在循环中用 + 和 += 操作符来堆积字符串. 这有时会产生平方而不是线性的**时间复杂**。
+    作为替代方案，你可以将每个子串加入列表，然后在循环结束后用 `''.join` 拼接列表。
+    也可以将每个子串写入一个 `io.StringIO` 缓冲区中。这些技巧保证始终有线性的平摊 (amortized) 时间复杂度。
+
+```python
+# Correct
+items = ['<table>']
+for last_name, first_name in employee_list:
+    items.append('<tr><td>%s, %s</td></tr>' % (last_name, first_name))
+items.append('</table>')
+employee_table = ''.join(items)
+
+# Wrong
+employee_table = '<table>'
+for last_name, first_name in employee_list:
+    employee_table += '<tr><td>%s, %s</td></tr>' % (last_name, first_name)
+employee_table += '</table>'
+```
+
+<a href="#top">Back to top</a>
+
+## Naming
+
+| 類型 | 公有 | 内部 |
+| ---- | --- | ---- |
+| 包 | `lower_with_under` | |
+| 模塊 | `lower_with_under` | `_lower_with_under` |
+| 類 | `CapWords` | `_CapWords` |
+| 異常 | `CapWords` | |
+| 函數 | `lower_with_under()` | `_lower_with_under()` |
+| 全局常量/類常量 | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
+| 全局變量/類變量 |	`lower_with_under` | `_lower_with_under` |
+| 實例變量 | `lower_with_under` | `_lower_with_under` |
+| 方法名 | `lower_with_under()` | `_lower_with_under()` |
+| 函數参數/方法参數 | `lower_with_under` | |
+| 局部變量 | `lower_with_under` | |
+
+<a href="#top">Back to top</a>
+
 
 ## Reference
 * [PEP8:Python 代碼風格指南](https://peps.python.org/pep-0008/)

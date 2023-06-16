@@ -376,5 +376,6 @@ from otherproject.ai import soul
 ## Reference
 * [PEP8:Python Code Style Guide](https://peps.python.org/pep-0008/)
 * [GOOGLE:styleguide](https://github.com/google/styleguide)
+* [Neo4j example](https://github.com/neo4j/graph-data-science-client)
 
 <a href="#top">Back to top</a>
