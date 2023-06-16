@@ -2,47 +2,47 @@
 [中文版](README.zh-TW.md) | [English](README.md)
 
 * 大綱:
-    * [介紹](#introduction)
+    * [簡介](#introduction)
     * [yapf 一鍵格式化](#yapf)
     * [代碼佈局](#code-layout)
         * [類,函數](#classfunction)
-    * [註釋](#comment)
+    * [評論](#comment)
         * [單行註釋](#one-line)
         * [多行註釋](#multiple-line)
         * [文檔字符串](#docstrings)
     * [類型註解](#type-annotation)
     * [導入順序](#import-oder)
-    * [字串](#string)
+    * [字符串](#string)
     * [命名](#naming)
-    * [設計模式](./design-pattern/)
+    * [設計模式](./設計模式/)
     * [參考](#reference)
 
 ## Introduction
-* 本文目的是希望精進 Python Code 能力，讓自己寫的代碼更炫泡、可重用、可維護、高易讀性
-* 本文中的所述並非最佳實踐，而是結合觀察多個大型項目整理。
-* 本文會講述到
-    * python 代碼風格
+* 這篇文章的目的是提高Python Code的能力,讓你寫的代碼更炫,可重用,可維護,可讀性強
+* 本文描述的不是最佳實踐,而是多個大型項目的觀察結合.
+* 本文將描述
+    * python代碼風格
     * python 設計模式
 * 推薦使用`Pylint`、`Pylance`...等相關包查找`bug`和格式問題
 
 
 ## [yapf](https://github.com/google/yapf)
 
-* 使用`yapf` 快速格式化你的代碼. 協同開發更新代碼後推薦使用`yapf`
+* 使用`yapf` 快速格式化你的代碼. 建議協同開發後使用`yapf`更新代碼
 
 * 如何使用:
     * `pip install yapf`
     * `yapf -i path/file.py --style='google'`
-      
-      **style** 包含:
-      * `pep8`(default)
-      * `google`
-      * `yapf`
-      * `facebook`
+    
+     **style** 包含:
+     * `pep8`(默認)
+     * `google`
+     * `yapf`
+     * `facebook`
 
-* 之前與之後
+* 之前和之後
 
-   * 前
+* 向前
 
         ```python
         import pandas as pd
@@ -64,7 +64,7 @@
             pass
         ```
 
-   * 後
+* 後退
 
         ```python
         import pandas as pd
@@ -98,30 +98,30 @@
 <details>
 <summary>More</summary>
 
-* Python代碼佈局風格通常是指Python程序員在編寫Python程序時所遵循的代碼風格規範,通常是指PEP 8規範.
+* Python代碼佈局風格通常是指Python程序員在編寫Python程序時遵循的代碼風格規範,通常是指PEP 8規範.
 
-* 以下是 Python 程序員普遍遵循的幾個 PEP 8 規範:
+* 以下是Python程序員普遍遵循的幾種PEP 8規範:
 
-* 縮進使用4個空格.不要使用製表符.
+* 使用 4 個空格縮進 . 不要使用製表符 .
 
-* 每行不超過 **79** 個字符. 長行應包含在括號內並在下一行縮進 4 個空格.
+* 每行不超過 **79** 個字符 . 長行應括在括號中並在下一行縮進 4 個空格 .
 
 * 用空格分隔二元運算符,e.g. **a + b**.
 
-* 將逗號放在最後一個元素之後而不是下一行的開頭. 這允許版本控制系統更好地比較差異.
+* 將逗號放在最後一個元素之後而不是下一行的開頭 . 這允許版本控制系統更好地比較差異 .
 
-* 類、函數、方法的定義上方空兩行,類的方法定義之間空一行,函數或方法的局部變量定義前空一行.
+* 類、函數、方法的定義上面有2個空行,類方法定義之間有1個空行,函數或方法的局部變量定義前有1個空行.
 
 * 在一個類中,類名應該使用**`UpperCamelCase`**風格,函數名和方法名應該使用**`lower_case_with_underscores`**風格,變量名也應該使用`lower_case_with_underscores`風格.
 
-* 對文檔字符串使用三引號(""")而不是單引號(''),並且文檔字符串應該縮進一次(與代碼縮進相同).
+* 對文檔字符串使用三引號 (""") 而不是單引號 (''),並且文檔字符串應該縮進一次(與代碼縮進相同).
 
 </details>
 
 
 ### Class、function
 
-* 類、函數等代碼塊都需要“**空2行**”。同一個類底下的函數代碼快只需要"**空1行**"
+* 類、函數等代碼塊需要“**空2行**”. 同一個類下的函數代碼只需要“**空1行**”
 * 注意換行的時機,如下:
 
 ```python
@@ -174,9 +174,9 @@ Comment
 ### DocStrings
 
 * 用於解釋文檔程序,通常用於註釋函數
-* 如果使用`vscode`編輯器,可以自動生成DocStrings(參考[鏈接](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator))
+* 如果使用`vscode`編輯器,可以自動生成DocStrings(參考[鏈接](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-文檔字符串生成器 ))
 
-* `DocStrings example`
+* %_內聯代碼_%
 
     ```python
     def add(num1,num2):
@@ -192,7 +192,7 @@ Comment
     print( add.__doc__ )
     ```
 
-* `reST`
+* %_內聯代碼_%
 
     ```python
     """
@@ -205,7 +205,7 @@ Comment
     """
     ```
 
-* `Google`
+* %_內聯代碼_%
 
     ```python
     """
@@ -255,7 +255,7 @@ Comment
 ## Type Annotation
 
 * 善用 `type annotation`
-    * 方便理解函數參數和返回數據類型
+    * 便於理解函數參數和返回數據類型
     * 有時可以將運行時錯誤轉化為編譯錯誤(提高性能)
 
     ```python
@@ -282,14 +282,14 @@ Comment
         print(var_one)
     ```
 
-* `Optional` and `Union`
-    * 有時參數類型可以**兩者**都是 `NoneType`,例如 `a` 可以是 `str`、`int`、`NoneType`
+* `Optional` 和 `Union`
+    * 有時參數類型可以是**both** `NoneType`,例如`a`可以是`str`、`int`、`NoneType`
     * 現在有以下標準的 `annotaion` 方法:
         * 顯式表達式:`|`
-        * `Union`:與顯示表達式相同,例如`Union[str, int, None]`表示參數有三種可能的類型
+        * `Union`:與顯示表達式相同,例如`Union[str, int, None]`表示參數可能有三種類型
         * `Optional`:比如`Optional[str]`表示參數是字符串或者`NoneType`
 
-            (如果可以使用`Optional`,就不要使用`Union`)
+            (如果你可以使用 `Optional`,不要使用 `Union`)
 
     ```python
     # Wrong: don't use Union if you can use Optional
@@ -316,20 +316,20 @@ Comment
 ## Import oder
 
 * Blocks:導入模塊順序
-    1. `Python` 標準庫(不需要額外的 `pip` 模組)
+    1. `Python` 標準庫(不需要額外的 `pip` 模塊)
         `import os`
 
     2. 第 3 方模組和包
         `import tensorflow as tf`
 
-    3. 代碼倉庫裡的分包(自己開發的)
+代碼倉庫裡的    3.分包(自己開發的)
         `from myproject.ai import mind`
 
-* 每個塊內的模塊順序按字母順序排序
+* 每個塊中的模塊順序按字母順序排序
 
 * 如果你使用的是`VSCode`,你可以在編輯器中使用:鼠標右鍵>排序導入
 
-* 導入塊和代碼塊需要“**2個空行**”
+* 導入塊和代碼塊需要“**2 空行**”
 ```python
 # Block 1
 import collections
@@ -378,13 +378,13 @@ s = ("this is a very"
     )
 
 # Correct (PEP8 not suggest):
-s = ' this is a very \//
-      long string if I had the \//
+s = ' this is a very \////
+      long string if I had the \////
       energy to type more and more ..'
 ```
 
-* 应该用 `f-string`、 `%` 运算符或 `format` 方法来格式化字符串。
-    即使所有参数都是字符串，也如此。你可以自行评判合适的选项. 可以用 + 实现单次拼接, 但是"**不要用 + 实现格式化**"。
+* 字符串應使用 `f-string`、`%` 運算符或 `format` 方法. 進行格式化
+     即使所有參數都是字符串也為真. 可以判斷合適的選項 . 可以使用+進行單拼接,但是“**不要使用+進行格式化**”.
 
 ```python
 # Correct
@@ -401,9 +401,9 @@ x = first + ', ' + second
 x = '名称: ' + name + '; 分数: ' + str(n)
 ```
 
-* 不要在循环中用 + 和 += 操作符来堆积字符串. 这有时会产生平方而不是线性的**时间复杂**。
-    作为替代方案，你可以将每个子串加入列表，然后在循环结束后用 `''.join` 拼接列表。
-    也可以将每个子串写入一个 `io.StringIO` 缓冲区中。这些技巧保证始终有线性的平摊 (amortized) 时间复杂度。
+* 不要在循環中使用 + 和 += 運算符堆疊字符串 . 這有時會產生二次而不是線性 **時間複雜度**.
+     作為替代方案,您可以將每個子字符串添加到列表中,然後在循環結束後將列表與 `''.join` 連接.
+     也可以將每個子字符串寫入一個 `io.StringIO` 緩衝區. 這些技巧保證總是線性攤銷時間複雜度.
 
 ```python
 # Correct
@@ -424,25 +424,25 @@ employee_table += '</table>'
 
 ## Naming
 
-| 類型 | 公有 | 内部 |
+|類型 |公開 |內部 |
 | ---- | --- | ---- |
-| 包 | `lower_with_under` | |
-| 模塊 | `lower_with_under` | `_lower_with_under` |
-| 類 | `CapWords` | `_CapWords` |
-| 異常 | `CapWords` | |
-| 函數 | `lower_with_under()` | `_lower_with_under()` |
-| 全局常量/類常量 | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
-| 全局變量/類變量 |	`lower_with_under` | `_lower_with_under` |
-| 實例變量 | `lower_with_under` | `_lower_with_under` |
-| 方法名 | `lower_with_under()` | `_lower_with_under()` |
-| 函數参數/方法参數 | `lower_with_under` | |
-| 局部變量 | `lower_with_under` | |
+|包裹| `lower_with_under` | |
+|模塊 | `lower_with_under` | `_lower_with_under` |
+|類 | `CapWords` | `_CapWords` |
+|異常 | `CapWords` | |
+|功能 | `lower_with_under()` | `_lower_with_under()` |
+|全局常量/類常量 | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
+|全局變量/類變量 | `lower_with_under` | `_lower_with_under` |
+|實例變量 | `lower_with_under` | `_lower_with_under` |
+|方法名稱 | `lower_with_under()` | `_lower_with_under()` |
+|函數參數/方法參數 | `lower_with_under` | |
+|局部變量 | `lower_with_under` | |
 
 <a href="#top">Back to top</a>
 
 
 ## Reference
 * [PEP8:Python 代碼風格指南](https://peps.python.org/pep-0008/)
-* [GOOGLE:風格指南](https://github.com/google/styleguide)
+* [GOOGLE:styleguide](https://github.com/google/styleguide)
 
 <a href="#top">Back to top</a>

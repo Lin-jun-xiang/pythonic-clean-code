@@ -1,13 +1,10 @@
 # python-clean-code
 [中文版](README.zh-TW.md) | [English](README.md)
 
-* The definition in this article is not the best practice, but combined with the observation of multiple large-scale projects, sorting out PEP8, GOOGLE... style (so some may not conform to PEP8)
-* It is recommended to use `Pylint`, `Pylance`... and other related packages to find `bug` and format problems
-
 * Outline:
+    * [introduction](#introduction)
     * [yapf one-key formatting](#yapf)
     * [code layout](#code-layout)
-        * [string](#string)
         * [class, function](#classfunction)
     * [Comment](#comment)
         * [single-line comment](#one-line)
@@ -15,7 +12,18 @@
         * [docstrings](#docstrings)
     * [type annotation](#type-annotation)
     * [import order](#import-oder)
+    * [string](#string)
+    * [naming](#naming)
+    * [design pattern](./design-pattern/)
     * [reference](#reference)
+
+## Introduction
+* The purpose of this article is to improve the ability of Python Code, so that the code you write is more dazzling, reusable, maintainable, and highly readable
+* The description in this article is not a best practice, but a combination of observations of multiple large-scale projects.
+* This article will describe
+    * python code style
+    * python design patterns
+* It is recommended to use `Pylint`, `Pylance`... and other related packages to find `bug` and format problems
 
 
 ## [yapf](https://github.com/google/yapf)
@@ -109,30 +117,6 @@
 * Use triple quotes (""") instead of single quotes ('') for docstrings, and docstrings should be indented once (same as code indentation) .
 
 </details>
-
-### String
-* Use '' or "", it is recommended to use '' uniformly
-
-```python
-# Wrong:
-s ='this is a very long string if I had the energy to type more and more ...'
-
-# Correct:
-s = """ this is a very
-        long string if I had the
-        energy to type more and more ..."""
-
-# Correct:
-s = ("this is a very"
-     "long string too"
-     "for sure ..."
-    )
-
-# Correct (PEP8 not suggest):
-s = ' this is a very \///
-      long string if I had the \///
-      energy to type more and more ..'
-```
 
 
 ### Class、function
@@ -345,7 +329,7 @@ Comment
 
 * If you are using `VSCode`, you can use in the editor: right mouse button > sort import
 
-* Import blocks and code blocks require "**2 blank lines**"
+* import blocks and code blocks require "**2 blank lines**"
 ```python
 # Block 1
 import collections
@@ -373,9 +357,92 @@ from otherproject.ai import soul
 
 <a href="#top">Back to top</a>
 
+
+## String
+
+* Use '' or "", it is recommended to use '' uniformly
+
+```python
+# Wrong:
+s ='this is a very long string if I had the energy to type more and more ...'
+
+# Correct:
+s = """ this is a very
+        long string if I had the
+        energy to type more and more ..."""
+
+# Correct:
+s = ("this is a very"
+     "long string too"
+     "for sure ..."
+    )
+
+# Correct (PEP8 not suggest):
+s = ' this is a very \///
+      long string if I had the \///
+      energy to type more and more ..'
+```
+
+* Strings should be formatted with `f-string`, the `%` operator, or the `format` method.
+     is true even if all arguments are strings. You can judge the appropriate option . can use + for single splicing, but "**do not use + for formatting**".
+
+```python
+# Correct
+x = f'名称: {name}; 分数: {n}'
+x = '%s, %s!' % (imperative, expletive)
+x = '{}, {}'.format(first, second)
+x = '名称: %s; 分数: %d' % (name, n)
+x = '名称: %(name)s; 分数: %(score)d' % {'name':name, 'score':n}
+x = '名称: {}; 分数: {}'.format(name, n)
+x = a + b
+
+# Wrong
+x = first + ', ' + second
+x = '名称: ' + name + '; 分数: ' + str(n)
+```
+
+* Do not stack strings . with + and += operators in loops This sometimes produces quadratic rather than linear **time complex**.
+     As an alternative, you can add each substring to a list, then concatenate the list with `''.join` after the loop is over.
+     can also write each substring into a `io.StringIO` buffer. These tricks guarantee always linear amortized time complexity.
+
+```python
+# Correct
+items = ['<table>']
+for last_name, first_name in employee_list:
+    items.append('<tr><td>%s, %s</td></tr>' % (last_name, first_name))
+items.append('</table>')
+employee_table = ''.join(items)
+
+# Wrong
+employee_table = '<table>'
+for last_name, first_name in employee_list:
+    employee_table += '<tr><td>%s, %s</td></tr>' % (last_name, first_name)
+employee_table += '</table>'
+```
+
+<a href="#top">Back to top</a>
+
+## Naming
+
+| type | public | internal |
+| ---- | --- | ---- |
+| package | `lower_with_under` | |
+| module | `lower_with_under` | `_lower_with_under` |
+| class | `CapWords` | `_CapWords` |
+| Exception | `CapWords` | |
+| function | `lower_with_under()` | `_lower_with_under()` |
+| Global Constants/Class Constants | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
+| Global variables/class variables | `lower_with_under` | `_lower_with_under` |
+| instance variable | `lower_with_under` | `_lower_with_under` |
+| method name | `lower_with_under()` | `_lower_with_under()` |
+| function parameter/method parameter | `lower_with_under` | |
+| Local variables | `lower_with_under` | |
+
+<a href="#top">Back to top</a>
+
+
 ## Reference
 * [PEP8:Python Code Style Guide](https://peps.python.org/pep-0008/)
 * [GOOGLE:styleguide](https://github.com/google/styleguide)
-* [Neo4j example](https://github.com/neo4j/graph-data-science-client)
 
 <a href="#top">Back to top</a>
