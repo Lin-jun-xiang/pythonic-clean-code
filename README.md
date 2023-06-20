@@ -2,11 +2,11 @@
 [中文版](README.zh-TW.md) | [English](README.md)
 
 * Outline:
-    * [introduction](#introduction)
+    * [Introduction](#introduction)
     * [yapf one-key formatting](#yapf)
     * [code layout](#code-layout)
         * [class, function](#classfunction)
-    * [Comment](#comment)
+    * [comment](#comment)
         * [single-line comment](#one-line)
         * [multiple-line comment](#multiple-line)
         * [docstrings](#docstrings)
@@ -18,8 +18,8 @@
     * [reference](#reference)
 
 ## Introduction
-* The purpose of this article is to improve the ability of Python Code, so that the code you write is more dazzling, reusable, maintainable, and highly readable
-* The description in this article is not a best practice, but a combination of observations of multiple large-scale projects.
+* The purpose of this article is to improve the ability of Python Code, so that the code you write is more dazzling, reusable, maintainable and readable
+* What this article describes is not a best practice, but a combination of observations from multiple large projects .
 * This article will describe
     * python code style
     * python design patterns
@@ -28,7 +28,7 @@
 
 ## [yapf](https://github.com/google/yapf)
 
-* Use `yapf` to quickly format your code . It is recommended to use `yapf` after collaborative development to update the code
+* Use `yapf` to quickly format your code . It is recommended to use `yapf` to update the code after collaborative development
 
 * how to use:
     * `pip install yapf`
@@ -98,11 +98,11 @@
 <details>
 <summary>More</summary>
 
-* Python code layout style usually refers to the code style specification that Python programmers follow when writing Python programs, usually refers to the PEP 8 specification .
+* Python code layout style usually refers to the code style specification that Python programmers follow when writing Python programs, usually refers to the PEP 8 specification.
 
-* The following are several PEP 8 specifications commonly followed by Python programmers:
+* The following are several PEP 8 specifications that Python programmers generally follow:
 
-* Use 4 spaces for indentation . do not use tabs .
+* use 4 spaces to indent . do not use tabs .
 
 * No more than **79** characters per line . Long lines should be enclosed in parentheses and indented 4 spaces on the next line .
 
@@ -110,7 +110,7 @@
 
 * Put the comma after the last element instead of the beginning of the next line . This allows version control systems to better compare diffs .
 
-* There are two blank lines above the definitions of classes, functions, and methods, one blank line between class method definitions, and one blank line before the local variable definitions of functions or methods.
+* There are 2 blank lines above the definitions of classes, functions, and methods, 1 blank line between class method definitions, and 1 blank line before the definition of local variables of functions or methods .
 
 * In a class, class name should use **`UpperCamelCase`** style, function name and method name should use **`lower_case_with_underscores`** style, variable name should also use `lower_case_with_underscores` style .
 
@@ -121,7 +121,7 @@
 
 ### Class、function
 
-* Code blocks such as classes and functions require "**empty 2 lines**". The function codes under the same class only need "**empty 1 line**"
+* Classes, functions and other code blocks need "**empty 2 lines**" . function codes under the same class only need "**empty 1 line**"
 * Pay attention to the timing of line breaks, as follows:
 
 ```python
@@ -174,9 +174,9 @@ Comment
 ### DocStrings
 
 * Used to explain documentation programs, usually used to annotate functions
-* If you use the `vscode` editor, DocStrings can be automatically generated (refer to [link](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring-generator ))
+* If you use the `vscode` editor, DocStrings can be automatically generated (refer to [link](https://github.com/Lin-jun-xiang/vscode-extensions-best#autodocstring---python-docstring Builder))
 
-* `DocStrings example`
+* %_inline code_%
 
     ```python
     def add(num1,num2):
@@ -192,7 +192,7 @@ Comment
     print( add.__doc__ )
     ```
 
-* `reST`
+* %_inline code_%
 
     ```python
     """
@@ -205,7 +205,7 @@ Comment
     """
     ```
 
-* `Google`
+* %_inline code_%
 
     ```python
     """
@@ -255,7 +255,7 @@ Comment
 ## Type Annotation
 
 * Make good use of `type annotation`
-    * is convenient for understanding function parameters and return data types
+    * facilitates understanding of function parameters and return data types
     * can sometimes turn runtime errors into compile errors (improves performance)
 
     ```python
@@ -286,7 +286,7 @@ Comment
     * Sometimes the parameter type can be **both** `NoneType`, for example `a` can be `str`, `int`, `NoneType`
     * now have the following standard `annotaion` methods:
         * explicit expression: `|`
-        * `Union`: Same as the display expression, for example, `Union[str, int, None]` indicates that there are three possible types of parameters
+        * `Union`: Same as the display expression, for example, `Union[str, int, None]` indicates that there may be three types of parameters
         * `Optional`: For example, `Optional[str]` indicates that the parameter is a string or `NoneType`
 
              (if you can use `Optional`, don't use `Union`)
@@ -316,16 +316,16 @@ Comment
 ## Import oder
 
 * Blocks: import module order
-    1. `Python` standard library (no extra `pip` modules required)
+    1. `Python` standard library (no extra `pip` module required)
         `import os`
 
     2. 3rd party mods and packs
         `import tensorflow as tf`
 
-    3. Subcontracts in the code warehouse (developed by myself)
+    3. subcontracting in the code warehouse (developed by myself)
         `from myproject.ai import mind`
 
-* Module order within each block is sorted alphabetically
+* The order of modules within each block is sorted alphabetically
 
 * If you are using `VSCode`, you can use in the editor: right mouse button > sort import
 
@@ -378,13 +378,13 @@ s = ("this is a very"
     )
 
 # Correct (PEP8 not suggest):
-s = ' this is a very \///
-      long string if I had the \///
+s = ' this is a very \/////
+      long string if I had the \/////
       energy to type more and more ..'
 ```
 
-* Strings should be formatted with `f-string`, the `%` operator, or the `format` method.
-     is true even if all arguments are strings. You can judge the appropriate option . can use + for single splicing, but "**do not use + for formatting**".
+* String should be formatted using `f-string`, `%` operator or `format` method .
+     is true even if all parameters are strings . can determine the appropriate option . can use + for single splicing, but "**do not use + for formatting**" .
 
 ```python
 # Correct
@@ -401,9 +401,9 @@ x = first + ', ' + second
 x = '名称: ' + name + '; 分数: ' + str(n)
 ```
 
-* Do not stack strings . with + and += operators in loops This sometimes produces quadratic rather than linear **time complex**.
-     As an alternative, you can add each substring to a list, then concatenate the list with `''.join` after the loop is over.
-     can also write each substring into a `io.StringIO` buffer. These tricks guarantee always linear amortized time complexity.
+* Do not stack strings using + and += operators in loops . this sometimes produces quadratic instead of linear **time complexity** .
+     As an alternative, you can add each substring to a list, then concatenate the list with `''.join` . after the loop is over
+     can also write each substring to a `io.StringIO` buffer . These tricks guarantee always linear amortized time complexity .
 
 ```python
 # Correct
@@ -424,19 +424,19 @@ employee_table += '</table>'
 
 ## Naming
 
-| type | public | internal |
+|Type |Public |Internal |
 | ---- | --- | ---- |
-| package | `lower_with_under` | |
-| module | `lower_with_under` | `_lower_with_under` |
-| class | `CapWords` | `_CapWords` |
-| Exception | `CapWords` | |
-| function | `lower_with_under()` | `_lower_with_under()` |
-| Global Constants/Class Constants | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
-| Global variables/class variables | `lower_with_under` | `_lower_with_under` |
-| instance variable | `lower_with_under` | `_lower_with_under` |
-| method name | `lower_with_under()` | `_lower_with_under()` |
-| function parameter/method parameter | `lower_with_under` | |
-| Local variables | `lower_with_under` | |
+|package|`lower_with_under`||
+|Module | `lower_with_under` | `_lower_with_under` |
+|class | `CapWords` | `_CapWords` |
+|Exception | `CapWords` | |
+|Function | `lower_with_under()` | `_lower_with_under()` |
+|Global constant/class constant | `CAPS_WITH_UNDER` | `_CAPS_WITH_UNDER` |
+|Global variables/class variables | `lower_with_under` | `_lower_with_under` |
+|Instance variables | `lower_with_under` | `_lower_with_under` |
+|Method name | `lower_with_under()` | `_lower_with_under()` |
+|Function parameter/method parameter | `lower_with_under` | |
+|local variables | `lower_with_under` | |
 
 <a href="#top">Back to top</a>
 

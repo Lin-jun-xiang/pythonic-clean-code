@@ -25,7 +25,7 @@
             * [Factory Method](#)
             * [Prototype](#)
         * **structural mode**
-            * [Adapter](#)
+            * [Adapter](#):heavy_check_mark:
             * [Bridge](#)
             * [Composite](#)
             * [Decorator](#decorator):heavy_check_mark:
@@ -34,7 +34,7 @@
             * [Proxy](#)
         * **Behavior Pattern**
             * [Template Method](#)
-            * [Command](#)
+            * [Command](#):heavy_check_mark:
             * [Interpreter](#)
             * [Mediator](#)
             * [Iterator](#)
@@ -76,7 +76,7 @@ Basic principles (1~5 also known as SOLID)
 * Creational Pattern
     * **Simple Factory pattern** Use the static method of class to obtain different objects according to different conditions, and use the obtained objects to do similar things. The disadvantage is that when you want to add different conditions, you must modify the static method of the category.
     * **Factory Method Pattern (Factory Method Pattern)** avoids the simple factory pattern. When adding conditions, modify the static method of the factory class (the modification should be closed).
-    * **Abstract Factory Pattern (Abstract Factory Pattern)** Abstract factory category, which can return the same type of factory. These return factories, with multiple identical methods, that do similar things.
+    * **Abstract Factory Pattern (Abstract Factory Pattern)** Abstract factory category, which can return factories of the same type. These return factories, with multiple identical methods, that do similar things.
     * **Builder Pattern (Builder Pattern)** sorts out the production steps of a certain type of product construction process, and all classes that want to produce this type of product must implement these standardized steps. In addition, in order to avoid missing a certain step during actual production, a series of production steps are performed by a single commander class.
     * **Prototype Pattern (Prototype Pattern)** Copy an existing object to generate a new object. Shallow clone: Only the properties of the old object are copied, and the objects in the old object are not copied. So new and old objects will share these other objects. Deep clone: The attributes in the old object and other referenced objects will be copied.
     * **Singleton Pattern** Allows a category to have only one instance (Instance) method. The way to generate a single instance: Lazy initialization: The instance is only generated when it is used for the first time. Eager initialization: An instance is generated when the class is loaded, regardless of whether it will be used later.
@@ -84,8 +84,8 @@ Basic principles (1~5 also known as SOLID)
 * Structural Pattern
     * **Adapter Pattern** An existing class, the interface is not what the user expects. The adapter is used as an intermediate interface to provide the interface expected by the user. It can be divided into two implementation methods Object Adapter Pattern (Object Adapter Pattern): Wrap the existing class instance in the adapter category. Class Adapter Pattern (class adapter pattern): use multiple inheritance.
     * **Bridge Pattern (Bridge Pattern)** extracts the specific behavior (implementation) of an object and becomes an independent object. That is, the original one object becomes two objects: "abstract object" + "real object". The advantage is that abstract objects and real objects can be decoupled and changed independently.
-    * **Composite Pattern** Between several objects, there is a tree structure.
-    * **Decorator Pattern (Decorator Pattern)** Dynamically add functions to an object. Functions are applied layer by layer, and each layer implements different objects.
+    * **Composite Pattern** Several objects present a tree structure.
+    * **Decorator Pattern (Decorator Pattern)** Dynamically add functions to an object. The functions are applied layer by layer, and each layer executes different objects.
     * **Facade Pattern** Package the original large system and open it to users with another simpler interface. Users only need to know how to use the interface. It is not necessary to understand the operation mode of each small system in the large system.
     * **Flyweight Pattern** Between objects, if there are common parts that can be shared, the shareable parts will be separated as shared objects, and the non-shareable parts will be externalized, and then used Externalized parts are passed to shared objects. This has the advantage of reducing memory usage. The disadvantage is that the program logic may become more complex.
     * **Proxy Pattern (Proxy Pattern)** There are two objects, the proxy object and the real object. The system uses the proxy object to operate, and the real object is operated inside the proxy object. Application: remote agent, virtual agent, security agent
@@ -104,7 +104,7 @@ Basic principles (1~5 also known as SOLID)
     * **State Pattern (State Pattern)** An object has multiple states, and has different behaviors in different states. Generally, multiple if elses may be used to handle these branching behaviors. If the state mode is used, these states are processed and extracted to another class to process these branches. That is, if else is rewritten as a class.
     * **Strategy Pattern** defines different algorithms as a family. These algorithms implement the same interface and are written as individual categories, so they can replace each other. The advantage is that if you want to add a new algorithm in the future, you only need to add an additional category without moving the original category.
     * **Template Method Pattern** Move the unchanging part to the parent category, and remove the repeated code in the subcategory
-    * **Visitor Pattern (Visitor Pattern)** When the "elements" in an "object structure" hardly change, but these "behaviors of elements" often increase or decrease, the visitor pattern is suitable. The visitor mode is to extract the "behavior of elements", and each behavior is made into a "Visitor (visitor) object". Each "Visitor (visitor) object" can be different from the original "object structure". "elements" that produce different behaviors.
+    * **Visitor Pattern (Visitor Pattern)** When the "elements" in an "object structure" hardly change, but these "behaviors of elements" often increase or decrease, the visitor pattern is suitable. The visitor mode is to extract the "behavior of elements", and each behavior is made into a "Visitor (visitor) object". Each "Visitor (visitor) object" can be different from the original "object structure". The "elements" of different behaviors.
 
 <a href="#top">Back to top</a>
 
@@ -113,7 +113,7 @@ Basic principles (1~5 also known as SOLID)
 Compared with java, python strictly distinguishes between abstraction and interface. Python has no native abstract categories and methods, and must use the abc package to implement abstract categories and interfaces. In Python, whether it is an abstract class or an interface, it inherits abc.ABC.
 (`C:\/Users\/junxianglin\/AppData\/Local\/Programs\/Python\/Python38\/lib\/abc.py`)
 
-* Abstract category (abstractor)
+* **Abstract category (abstractor)**
 Abstraction of     * classes
     * **Categories that cannot be materialized**
     * When a method (Method) is covered with a `@abc.abstractmethod` decorator (decorator), it means that the establishment of an abstract method must rely on subcategory override.
@@ -144,8 +144,10 @@ Abstraction of     * classes
         animal = Animal() # TypeError: Can't instantiate abstract class Animal with abstract methods shout
         ```
 
-* Interface/Interface (Interface)
+* **Interface/Interface (Interface)**
 Abstraction of     * behavior
+    * **Let the outside communicate with the inside through this interface**
+    * "Interfaces" usually have certain specific forms. Only when both sending and receiving parties have the same "interfaces" can the interfaces be used effectively
 
 * Abstract base class (abstractor basic class, abc)
      Suppose we want to develop a data interface with three functions: connect to the database, read data, and execute SQL. These functions can be defined through ABC first, and then the subclass is responsible for implementing (overriding)
@@ -239,9 +241,95 @@ product.price # 150
 
 <a href="#top">Back to top</a>
 
+---
+
 ## Singleton
 
 * Singleton
+
+<a href="#top">Back to top</a>
+
+## Builder
+
+* Builder/Builder pattern (Builder)
+* When to use
+    * **The Product object that needs to be created has a complex internal structure** (multiple different types of member attributes, parameters)
+    * The properties of the objects that need to be generated depend on each other, and you need to **specify the generation order**
+    * objects are created independently of the class that created the object. In the builder mode, by introducing "director class (Director)", the creation process is independently encapsulated in the director class
+    * isolates the creation and use of complex objects, and enables the same creation process to create different products
+
+* shortcoming
+    * The products created by the builder mode generally have more in common, if the products are very different, it is not suitable
+
+* structure
+    * Builder: Builder, the interface used to define the necessary steps (methods) in the process of building objects. (for the **abstract base class interface** of ConcrteBuilder)
+    * ConcreteBuilder: Concrete builder, implements the Builder interface, the type actually used to build objects
+    * Director: Director, responsible for instructing ConcreteBuilder how to build objects. It defines a **process** for building a product.
+    * Product: Product, Product is the final built product.
+
+        <img src='img/2023-06-19-13-28-14.png' width='60%' />
+
+
+    ```python
+    from abc import ABC, abstractmethod
+
+
+    class Product:
+        def __init__(self):
+            self.part_a = None
+            self.part_b = None
+
+        def __str__(self):
+            return f"Part A: {self.part_a}, Part B: {self.part_b}"
+
+
+    class Builder(ABC):
+        @abstractmethod
+        def build_part_a(self):
+            pass
+
+        @abstractmethod
+        def build_part_b(self):
+            pass
+
+        @abstractmethod
+        def get_product(self):
+            pass
+
+
+    class ConcreteBuilder(Builder):
+        def __init__(self):
+            self.product = Product()
+
+        def build_part_a(self):
+            self.product.part_a = "Part A"
+
+        def build_part_b(self):
+            self.product.part_b = "Part B"
+
+        def get_product(self):
+            return self.product
+
+
+    class Director:
+        def __init__(self, builder):
+            self.builder = builder
+
+        def construct(self):
+            self.builder.build_part_a()
+            self.builder.build_part_b()
+
+
+    builder = ConcreteBuilder()
+    director = Director(builder)
+
+    director.construct()
+    product = builder.get_product()
+    print(product) # Part A: Part A, Part B: Part B
+    ```
+
+
+<a href="#top">Back to top</a>
 
 ## Decorator
 
@@ -252,7 +340,7 @@ product.price # 150
     * does not modify the source code of existing functions
     * does not modify the calling method of existing functions
     * add extra functionality to existing functions
-* New functions built in Python can be extended to existing objects through `＠`
+* New functions built in Python can extend existing objects through `＠`
 * Common extension categories are: **data verification (pydantic)**, **Caching**, Logging, Monitoring, **Debugging**, Business Rules, Excryption, Compression…
 
 <details>
@@ -472,6 +560,8 @@ product.price # 150
     ```
 </details>
 
+<a href="#top">Back to top</a>
+
 ## Strategy
 
 * Strategy mode (Strategy)
@@ -592,6 +682,7 @@ context.parse_data(data)
 
 </details>
 
+<a href="#top">Back to top</a>
 
 ## MVC
 
@@ -621,6 +712,8 @@ context.parse_data(data)
     * With continuous development and adding functions, **Controller code will become more and more bloated**
     * are difficult to unit test
 
+<a href="#top">Back to top</a>
+
 ## MVP
 
 * In order to improve the shortcomings of MVC, replace Controller with Presenter
@@ -640,6 +733,8 @@ context.parse_data(data)
 * shortcoming
     * With continuous development and adding features, the code of Presenter will become more and more bloated
 
+<a href="#top">Back to top</a>
+
 ## MVVM
 
 * Whether it is MVC or MVP, it is impossible to avoid the problem that the code of the Presenter (Controller) will become more and more bloated. If the same effect (external behavior) can be achieved, the less code the better (internal behavior), so MVVM was born
@@ -647,8 +742,13 @@ context.parse_data(data)
 
 ... unfinished
 
+<a href="#top">Back to top</a>
+
+
 ## Reference
 [23 Design Patterns](https://jasonblog.github.io/note/design_pattern/index.html)
 [Design Patterns in Python](https://python-web-guide.readthedocs.io/zh/latest/design/design.html)
 [Python Common Design Patterns](https://refactoringguru.cn/design-patterns/python)
 [MVC, MVP, MVVM](https://ihelp.ithome.com.tw/articles/10218263)
+
+<a href="#top">Back to top</a>
