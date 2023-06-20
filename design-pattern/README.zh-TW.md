@@ -1,51 +1,51 @@
 # Design Pattern
 [中文版](README.zh-TW.md) | [English](README.md)
 
-* 設計模式是一組重複使用的代碼設計經驗的總結,為大多數人所知,編目編碼.
-* 使用設計模式是為了代碼的複用,讓代碼更容易被別人理解,保證代碼的可靠性.
-* 接口=接口,對象=對象
-* 預知:面向對象、類別與對象、可變與不可變對象、賦值傳遞、Decorator. [參考概念]()
+* 设计模式是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。
+* 使用设计模式是为了可重用代码、让代码更容易地被他人理解、保证代码可靠性。
+* 接口=介面、對象=物件
+* 預先認知: 物件導向、類別與物件、可變與不可變物件、Pass by Assignment、Decorator。[參考Notion]()
 
 
 * 大綱:
-    * 基本供稿
-        * [面向對象和設計模式簡介](#introduction)
-            * [面向對象的大綱](#intro-oop)
-            * [設計模式簡介](#intro-design-pattern)
+    * 基礎提要
+        * [物件導向與設計模式概要](#introduction)
+            * [物件導向概要](#intro-oop)
+            * [設計模式概要](#intro-design-pattern)
         * [繼承]()
-        * [抽像類、接口](#abstractorinterface)
-        * [多類型]()
+        * [抽象類別、介面](#abstractorinterface)
+        * [多型]()
         * [封裝](#encapsulation)
-    * [23種設計模式](https://jasonblog.github.io/note/design_pattern/index.html)
-     : emoji_heavy_check_mark: 常用
-        * **創意模式**
-            * [單例](#singleton)
-            * [抽象工廠](#)
-            * [建造者](#)
-            * [工廠方法](#)
-            * [原型](#)
-        * **結構模式**
-            * [適配器](#)
-            * [橋](#)
-            * [複合](#)
-            * [裝飾器](#decorator):heavy_check_mark:
-            * [外觀](#)
-            * [享元](#)
-            * [代理](#)
+    * [23 種設計模式](https://jasonblog.github.io/note/design_pattern/index.html)
+       :heavy_check_mark:常用
+        * **創建型模式**
+            * [Singleton](#singleton)
+            * [Abstract Factory](#)
+            * [Builder](#)
+            * [Factory Method](#)
+            * [Prototype](#)
+        * **結構型模式**
+            * [Adapter](#):heavy_check_mark:
+            * [Bridge](#)
+            * [Composite](#)
+            * [Decorator](#decorator):heavy_check_mark:
+            * [Facade](#)
+            * [Flyweight](#)
+            * [Proxy](#)
         * **行為模式**
-            * [模板方法](#)
-            * [命令](#)
-            * [解釋器](#)
-            * [中介](#)
-            * [迭代器](#)
-            * [觀察者](#)
-            * [責任鏈](#)
-            * [紀念品](#)
-            * [狀態](#)
-            * [策略](#strategy):heavy_check_mark:
-            * [訪客](#)
+            * [Template Method](#)
+            * [Command](#):heavy_check_mark:
+            * [Interpreter](#)
+            * [Mediator](#)
+            * [Iterator](#)
+            * [Observer](#)
+            * [Chain Of Responsibility](#)
+            * [Memento](#)
+            * [State](#)
+            * [Strategy](#strategy):heavy_check_mark:
+            * [Visitor](#)
     * 特殊設計
-        * [MVC(從 Observer、Strategy、Composite 演變而來)](#mvc):heavy_check_mark:
+        * [MVC (由Observer, Strategy, Composite演變)](#mvc):heavy_check_mark:
         * [MVP](#mvp):heavy_check_mark:
         * [MVVM](#mvvm):heavy_check_mark:
     * [參考](#reference)
@@ -55,72 +55,72 @@
 
 #### Intro-OOP
 
-基本原理(1~5又稱SOLID)
+基本原則 (1~5又稱SOLID)
 
-* **單一職責原則(SRP:Single Responsibility Principle)** 一個類別應該只有一個改變的原因
-* **開、閉原則(OCP:Open Closed Principle)**對擴展開放(open for extension)和對修改關閉(closed for modification)
-* **里氏替換原則(LSP:Liskov Substitution Principle)** 子類別必須能夠替換父類別.
-* **接口隔離原則(ISP:Interface Segregation Principle)**
-* **依賴倒置原則(DIP:Dependency Inversion Principle)** Abstraction should not depend on details, details should depend on abstraction. 因為圖像比較穩定. 高層模塊不應該依賴低層模塊,兩者都應該依賴於抽象. 程序到接口,而不是具體實現.
-* **得墨忒耳法則(LoD:Law of Demeter)** 最少知識原則 只與你最親密的朋友交談
+* **單一職責原則 (SRP：Single Responsibility Principle)** 一個類別，應該只有一個引起它變化的原因
+* **開放、封閉原則 (OCP：Open Closed Principle)** 對於擴展是開放的 (open for extension) 對於修改是封閉的 (closed for modification)
+* **里氏(Liskov)代換原則 (LSP：Liskov Substitution Principle)** 子類別必須能替換父類別。
+* **介面隔離原則 (ISP：Interface Segregation Principle)**
+* **依賴倒轉原則 (DIP：Dependency Inversion Principle)** 抽象不應該依賴細節，細節應該依賴抽像。因為抽像相對較穩定。 高層模組不應該依賴低層模組，兩個都應該依賴抽像。 針對接口編寫程式，不要對具體實現的東西編寫程式。
+* **迪米特法則 (LoD：Law of Demeter)** 最少知識原則 Principle of Least Knowledge 只和自己眼前的朋友交談 Only talk to your immediate friends 低耦合
 
-     例如:郵遞員寄掛號信,收件人需要蓋章. 一般人不會讓郵遞員自己進屋找章,既浪費時間又浪費時間不安全. 一般都是自己進屋拿,或者讓其他家人幫我拿. 因為不應該給郵遞員進屋找東西的權限,而且郵遞員不需要知道印章放在房子的什麼地方.
-* **Composition/Aggregation Reuse Principle (CARP)(複合/聚合重用原則)**使用更多的合成/聚合和更少的繼承. 當兩個對像有一個has-a(has-parts,is-part-of) relationship => composition/aggregation (A has a B) 當兩個對像有 is-a (is-a-kind-of) 關係時 => 繼承 (Superman is a kind of Person)
-    * Composite(複合): 當兩個對象A和B有復合關係時,表示其中一個對象消失了(ex:book),另一個對像也消失了(ex:chapter).
-    * Aggregate(聚合):當A和B兩個對象存在聚合關係時,表示其中一個對象消失了(ex:team),另一個對像沒有消失(ex:player)%_ddot_ %
+    例如: 郵差送來掛號信，須要蓋收件人印章。 一般人不會叫郵差自己進屋找印章，既浪費時間也不安全。 正常都是自己進屋拿，或是請其他家人幫忙拿。 因為不應該給郵差進屋找東西的權限、郵差也不須要知道印章放在屋內何處。
+* **合成/聚合重覆使用原則 (CARP)(Composite/Aggregate Reuse Principle)** 多用合成/聚合，少用繼承。 在兩個物件有 has-a (has-parts、is-part-of)關係時 => 合成/聚合 (A has a B) 當兩個物件有 is-a (is-a-kind-of)關係時 => 繼承 (Superman is a kind of Person)
+    * 合成 (Composite)：A、B兩物件有合成關係時，表示其中一個物件消失(ex:書本)，另一個物件也會消失(ex:章節)。
+    * 聚合 (Aggregate)：A、B兩物件有聚合關係時，表示其中一個物件消失(ex:球隊)，另一個物件不會消失(ex:球員)。
 
 <a href="#top">Back to top</a>
 
 #### Intro-Design Pattern
 
-* 創作模式
-    * **簡單工廠模式** 使用類的靜態方法根據不同的條件獲取不同的對象,使用獲取到的對像做類似的事情. 缺點是當你想添加不同的條件時,你必須修改類別的靜態方法.
-    * **工廠方法模式(Factory Method Pattern)**避免了簡單工廠模式.在添加條件的時候,修改工廠類的靜態方法(修改要關閉).
-    * **抽象工廠模式(Abstract Factory Pattern)** 抽象工廠類別,可以返回相同類型的工廠. 這些返回工廠,有多個相同的方法,做類似的事情.
-    * **建造者模式(Builder Pattern)**梳理了某類產品構建過程的生產步驟,所有想要生產該類產品的類都必須實現這些標準化的步驟. 另外,為了避免在實際製作過程中漏掉某個步驟,一系列的製作步驟由一個指揮官類完成.
-    * **原型模式(Prototype Pattern)** 複製一個已有對像生成新對象. 淺克隆: 只複製舊對象的屬性,不復制舊對像中的對象. 所以新舊對象會共享這些其他對象. 深度克隆:舊對象和其他引用對像中的屬性會被複製.
-    * **Singleton Pattern** 允許一個類別只有一個實例(Instance)方法 . 生成單個實例的方式: Lazy initialization:實例只在第一次使用時生成. Eager initialization:類加載時生成一個實例,不管後面是否會用到.
+* 創建型模式 (Creational Pattern)
+    * **簡單工廠模式 (Simple Factory pattern)** 使用 class 的靜態方法，依不同條件，取得不同物件，並用取得的物件，做類似的事情。 缺點是要新增不同條件時，須修改到類別的靜態方法。
+    * **工廠方法模式 (Factory Method Pattern)** 避免了簡單工廠模式，要新增條件時，對工廠類靜態方法的修改(對修改應該是封閉的)。
+    * **抽象工廠模式 (Abstract Factory Pattern)** 抽象工廠類別，可返回同類型的工廠。這些返回的工廠，有多個相同的方法，做類似的事。
+    * **建造者模式(生成器模式) (Builder Pattern)** 將某種類的產品建造過程，將生產步驟整理出來， 所有要生產這類產品的 class，均要實現這些標準化步驟。 另外，為避免實際生產時，遺漏某步驟，統一由一個指揮者 class，執行一系列的生產步驟。
+    * **原型模式 (Prototype Pattern)** 複製一個已存在的物件，來產生新的物件。 淺複製(shallow clone)：僅複製舊物件內的屬性，舊物件內的物件不複製。所以新、舊物件會共用這些其他物件。 深複製(deep clone)：舊物件內的屬性、參考到的其他物件，都會複製一份。
+    * **單例模式 (Singleton Pattern)** 讓一個類別只能有一個實例(Instance)的方法。 產生單一實例的方式： 懶漢方式(Lazy initialization)：第一次使用時，才產生實例。 餓漢方式(Eager initialization)：class 載入時就產生實例，不管後面會不會用到。
 
-* 結構模式
-    * **Adapter Pattern** 一個已有的類,接口不是用戶期望的 . 適配器作為中間接口,提供用戶期望的接口. 可以分為兩種實現方法對象適配器模式(Object Adapter Pattern):將已有的類實例包裝在適配器類中. Class Adapter Pattern(類適配器模式):使用多重繼承.
-    * **橋接模式(Bridge Pattern)**把一個對象的具體行為(實現)抽取出來,成為一個獨立的對象. 即原來的一個對像變成了兩個對象:“抽像對象”+“真實對象” object". 優點是抽像對象和真實對象可以解耦,獨立變化.
-    * **Composite Pattern** 幾個對象之間,有一個樹結構.
-    * **裝飾器模式(Decorator Pattern)**動態給一個對象添加函數.函數是一層層應用的,每一層實現不同的對象.
-    * **Facade Pattern** 把原來的大系統打包,用另一個更簡單的接口開放給用戶. 用戶只需要知道接口的使用方法就可以了. 不需要了解的運行方式大系統中的各個小系統.
-    * **享元模式** 對象之間,如果存在可以共享的公共部分,則將可共享部分分離為共享對象,將不可共享部分外化,然後使用外化部分傳遞to shared objects. 這樣的好處是減少內存佔用. 缺點是程序邏輯可能會變得比較複雜.
-    * **代理模式(Proxy Pattern)**有兩個對象,代理對象和真實對象.系統使用代理對象進行操作,真實對像在代理對象內部進行操作%_ddot_ % 應用:遠程代理、虛擬代理、安全代理
+* 結構型模式 (Structural Pattern)
+    * **適配器模式 (Adapter Pattern)** 某個已存在的類，介面不是用戶所期待的。適配器，則是當做中間的轉接口，以提供用戶期待的介面。 可分成兩種實作方法 Object Adapter Pattern (對象適配器模式)：將已存在的類的實例，包裹在適配器類別中。 Class Adapter Pattern (類適配器模式)：使用多重繼承。
+    * **橋接模式 (Bridge Pattern)** 將一個物件的具體行為(實作)抽出來，成為一個獨立的物件。 也就是原本的一個物件，變成兩個物件：「抽像物件」+「實作物件」。 優點是抽像物件與實作物件可以解耦合，各自獨立變化。
+    * **組合模式 (Composite Pattern)** 數個物件之間，呈現一種樹狀結構。
+    * **裝飾模式 (Decorator Pattern)** 在某一物件動態加上功能。 一層一層的將功能套上去，每一層執行的是不同的物件。
+    * **外觀模式 (Facade Pattern)** 將原有的大系統包裝起來，用另一個較簡易的介面開放給使用者。 使用者只須瞭解介面的的使用方式。而不須瞭解大系統內，各個小系統的操作方式。
+    * **享元模式 (Flyweight Pattern)** 物件之間，若有共同的部分可以共享，則將可共用的部分獨立為共享物件， 不能共享的部份外部化，使用時再將外部化的部分傳給共享物件。 這樣做的優點是減少記憶體使用量。缺點是程式邏輯可能變得較複雜。
+    * **代理模式 (Proxy Pattern)** 有兩個物件，代理物件、真實物件， 系統使用代理物件操作，代理物件內部則再去操作真實物件。 應用：遠程代理、虛擬代理、安全代理
 
-* 行為模式
-    * **Chain-of-responsibility Pattern** 有幾個對象可以處理某個請求,但是處理的範圍(權限)不同. 當這個對像沒有處理權限時,可以通過此請求到下一個對象繼續處理.
-    * **命令模式(Command Pattern)** 一般的命令包括發出命令和執行命令 . 命令模式就是把這個過程拆分成三個對象,發出命令的對象(Invoker),執行命令的對象執行命令(command),執行命令的對象(receiver). Invoker對像用於構建要執行的命令. 這樣,當需要擴展功能時,比如添加重複執行命令,取消命令...,等.,變得更簡單.
-    * **解釋器模式(Interpreter Pattern)**用於解釋和翻譯一種語言.
-    * **迭代器模式(Iterator Pattern)**一種遍歷容器中元素的方法.
-    * **中介者模式** 當對象之間可能存在錯綜複雜的交互時,可以將這些關係交給另一個對象(中介者)來降低這些對象之間的交互耦合.
-    * **備忘錄模式(Memento Pattern)** 一種將對象恢復到之前狀態的方法.
-    * **觀察者模式(Publish/Subscribe Mode)(觀察者模式)**兩種類型的對象,“通知者”和“觀察者”.
-        * 訂閱:“通知者”可以在訂閱列表中添加或刪除“觀察者”
-        * 發布:當需要監聽的事件發生時,“通知者”可以從訂閱列表中通知“觀察者”該事件,“觀察者”會對事件採取相應的動作.
-        * 作用:解耦,讓耦合的兩邊依賴於抽象(接口)而不是具體的.
-    * **狀態模式(State Pattern)**一個對像有多個狀態,在不同的狀態下有不同的行為.一般情況下可能會用多個if else來處理這些分支行為.如果狀態模式被使用,這些狀態被處理並提取到另一個類來處理這些分支. 也就是if else被重寫為一個類.
-    * **Strategy Pattern** 將不同的算法定義為一個家族.這些算法實現了相同的接口,並作為單獨的類別來編寫,因此它們可以相互替換. 優點是如果你想添加以後有新的算法,只需要在原來的類別不移動的情況下,多加一個類別.
-    * **Template Method Pattern** 將不變的部分移到父類中,去掉子類中重複的代碼
-    * **訪問者模式(Visitor Pattern)** 當一個“對象結構”中的“元素”幾乎沒有變化,但這些“元素的行為”經常增加或減少時,訪問者模式適用於. visitor mode是提取“元素的行為”,將每個行為做成一個“Visitor(訪問者)對象”. 每個“Visitor(訪問者)對象”都可以與原來的“對象結構”不同.”產生不同行為的元素”.
+* 行為型模式 (Behavioral pattern)
+    * **責任鏈模式 (Chain-of-responsibility Pattern)** 有幾個物件都能處理某種請求，但處理的能範圍(權限)不同， 當這個物件沒有處理的權限時，能夠將這個請求，傳遞給下一個物件繼續處理。
+    * **命令模式 (Command Pattern)** 一般命令包含發出命令和執行命令。 命令模式，則是將這個過程拆成三個物件，發出命令的物件(Invoker)、命令的物件(command)、執行命令的物件(receiver) 由 Invoker 物件，來建造要執行的命令。如此要擴充功能時，例如增加命令重覆執行、取消命令...等，也變得較單純。
+    * **解釋器模式 (Interpreter Pattern)** 用來解釋、直譯一種語言的方法。
+    * **迭代器模式 (Iterator Pattern)** 遍歷容器裡面元素的一種方法。
+    * **中介者模式 (Mediator Pattern)** 當物件和物件之間或有錯綜複雜的交互作用，可將這些關係交由另一物件(中介者)來處理， 以減少這些物件間的耦合。
+    * **備忘錄模式 (Memento Pattern)** 讓物件回復到之前狀態的方法。
+    * **觀察者模式 (發佈/訂閱模式) (Observer Pattern)** 兩種類型的物件，「通知者」和「觀察者」。
+        * 訂閱：「通知者」可增減訂閱列表中的「觀察者」
+        * 發佈：當有監聽的事件發生時，「通知者」可從訂閱列表中，將事件通知「觀察者」，「觀察者」則會對此事件做相對應的動作。
+        * 功用：解除耦合，讓耦合的雙方依賴抽像(接口)，而不依賴具體。
+    * **狀態模式 (State Pattern)** 一物件有多個狀態，在不同狀態下有不同的行為。 一般可能會用多個 if else 來處理這些分支行為。 若使用狀態模式，則是將這些狀態處理，提取出來到另外的 class 處理這些分支。 也就是將 if else 改寫成 class。
+    * **策略模式 (Strategy Pattern)** 將不同的演算法，定義成一個家族， 這些演算法實現同樣的接口，且寫成個別的類別，所以彼此之間能夠互相替換。 優點是以後要增加新的演算法，只須額外新增一個類別，不須動到原本的類別。
+    * **模板方法模式 (Template Method Pattern)** 將不變的部分移到父類別，去除子類別重覆的程式碼
+    * **訪問者模式 (Visitor Pattern)** 當一個「物件結構」中的「元素」幾乎不會異動，但這些「元素的行為」常會增減，則適合用訪問者模式。 訪問者模式是將「元素的行為」，提取出來，每一種行為做成一個 「Visitor(訪問者) 物件」， 每一個 「Visitor(訪問者) 物件」，都能根據原本「物件結構」中不同的「元素」，產生不同行為。
 
 <a href="#top">Back to top</a>
 
 ## Abstractor、Interface
 
-python與java相比,嚴格區分抽象和接口. Python沒有原生的抽像類和方法,必須使用abc包來實現抽像類和接口. 在Python中不管是抽像類還是接口, 它繼承了 abc.ABC.
-(`C:\//Users\//junxianglin\//AppData\//Local\//Programs\//Python\//Python38\//lib\//abc.py`)
+python相比java，java嚴格區分了抽象以及介面。python沒有原生的抽象類別和方法，必須使用abc package實作抽象類別、介面。在Python不管是抽象類別還是介面都是繼承abc.ABC。
+(`C:\Users\junxianglin\AppData\Local\Programs\Python\Python38\lib\abc.py`)
 
-* 抽像類(abstractor)
-     * 類的抽象
-    * **無法具體化的類別**
-    * 當一個方法(Method)被`@abc.abstractmethod`裝飾器(decorator)覆蓋時,意味著抽象方法的建立必須依賴子類override.
+* **抽象類別(abstractor)**
+    * 類別的抽象化
+    * **無法實體化的類別**
+    * 當有方法(Method)套上`@abc.abstractmethod`裝飾器(decorator)時，表示建立抽象方法，必須依靠子類別覆寫。
 
         ```python
         from abc import ABC, abstractmethod
-        class Animal(ABC): # python 中繼承 abc.ABC,表示該類別為抽象類別,不可直接實體化
+        class Animal(ABC): # python 中繼承 abc.ABC，表示該類別為抽象類別，不可直接實體化
             def __init__(self, name="john", shout_num=1):
                 self.name = name
                 self.shout_num = shout_num
@@ -128,7 +128,7 @@ python與java相比,嚴格區分抽象和接口. Python沒有原生的抽像類�
                 """ implement run behavior"""
                 print('run')
             @abstractmethod
-            def shout(self): # 套上抽象類別修飾器,該方法為抽象方法,不可直接實體化,僅定義方法,實際內容由子類別覆寫
+            def shout(self): # 套上抽象類別修飾器，該方法為抽象方法，不可直接實體化，僅定義方法，實際內容由子類別覆寫
                 pass
             
         class Dog(Animal):
@@ -144,18 +144,20 @@ python與java相比,嚴格區分抽象和接口. Python沒有原生的抽像類�
         animal = Animal() # TypeError: Can't instantiate abstract class Animal with abstract methods shout
         ```
 
-* 接口/接口(接口)
-     * 行為的抽象
+* **介面/接口(Interface)**
+    * 行為的抽象化
+    * **讓外部可以透過這個接口與內部作溝通**
+    * 「接口」通常都是有著某些特定形態的，只有收發雙方都有一樣的「接口」，接口才能被有效使用
 
-* 抽象基類(abstractor basic class,abc)
-     假設我們要開發一個數據接口,有三個功能:連接數據庫、讀取數據、執行SQL. 這些功能可以先通過ABC定義,然後由子類負責實現(重寫)
+* 抽象基底類別(abstractor basic class, abc)
+    假設我們要開發一個數據接口，具備三個功能: 連接數據庫、讀取數據、執行SQL，可以先透過ABC定義這些功能，再由子類別負責實現(覆寫)
     ```python
     from abc import ABC
     from abc import abstractmethod
     ​
     ​
     class Database(ABC):
-        def register(self, host, user, password): # register是每個子類都需要的,直接實現在abc裡面
+        def register(self, host, user, password): # register是每個子類都需要的，直接實現在abc裡面
             print("Host : {}".format(host))
             print("User : {}".format(user))
             print("Password : {}".format(password))
@@ -210,8 +212,8 @@ python與java相比,嚴格區分抽象和接口. Python沒有原生的抽像類�
 
 ## Encapsulation
 
-* 封裝的目的是防止外界有任何機會以意想不到的方式改變對象. 封裝可以加強對象的健壯性.
-* python中有一個`property`裝飾器,可以把一個方法變成一個屬性,相當於封裝了這個屬性. 外界不需要知道獲取這個屬性的實現方法,也不會隨意更改.
+* 封裝的目的是不希望外部有任何機會以我們非預期的方式去更改物件，封裝可以強化物件的強健性。
+* 在python中有`property`這個decorator可以將方法變成屬性，等於是封裝了這個屬性，外部不需要知道拿到這個屬性的實作方法，並且也不會被任意地更改。
 
 ```python
 class Product():
@@ -239,29 +241,115 @@ product.price # 150
 
 <a href="#top">Back to top</a>
 
+---
+
 ## Singleton
 
-* 單例
+* 單件(Singleton)
+
+<a href="#top">Back to top</a>
+
+## Builder
+
+* 生成器/建造者模式(Builder)
+* 使用時機
+    * **需要建立的 Product 物件有複雜的內部結構** (多種不同類型的成員屬性、參數)
+    * 需要生成的物件屬性相互依賴，需要**指定生成順序**
+    * 物件的創建過程獨立於創建物件的類。在建造者模式中通過引入"指揮者類(Director)"，將創建過程獨立封裝在指揮者類中
+    * 隔離覆雜物件的創建與使用，併使得相同的創建過程可以創建不同產品
+
+* 缺點
+    * 建造者模式所創建的產品一般具有較多共同點，如果產品之間差異很大，則不適合
+
+* 結構
+    * Builder: 建造者，用來定義建造物件過程中各必要步驟（方法）的介面。(為ConcrteBuilder的**抽象基底類接口**)
+    * ConcreteBuilder: 具體建造者，實作Builder介面，實際用來建造物件的類別
+    * Director: 指揮者，負責指揮ConcreteBuilder該如何建造物件。它定義了一個建造產品的**流程**。
+    * Product: 產品，Product 是最終建立的產品。
+
+        <img src='img/2023-06-19-13-28-14.png' width='60%' />
+
+
+    ```python
+    from abc import ABC, abstractmethod
+
+
+    class Product:
+        def __init__(self):
+            self.part_a = None
+            self.part_b = None
+
+        def __str__(self):
+            return f"Part A: {self.part_a}, Part B: {self.part_b}"
+
+
+    class Builder(ABC):
+        @abstractmethod
+        def build_part_a(self):
+            pass
+
+        @abstractmethod
+        def build_part_b(self):
+            pass
+
+        @abstractmethod
+        def get_product(self):
+            pass
+
+
+    class ConcreteBuilder(Builder):
+        def __init__(self):
+            self.product = Product()
+
+        def build_part_a(self):
+            self.product.part_a = "Part A"
+
+        def build_part_b(self):
+            self.product.part_b = "Part B"
+
+        def get_product(self):
+            return self.product
+
+
+    class Director:
+        def __init__(self, builder):
+            self.builder = builder
+
+        def construct(self):
+            self.builder.build_part_a()
+            self.builder.build_part_b()
+
+
+    builder = ConcreteBuilder()
+    director = Director(builder)
+
+    director.construct()
+    product = builder.get_product()
+    print(product) # Part A: Part A, Part B: Part B
+    ```
+
+
+<a href="#top">Back to top</a>
 
 ## Decorator
 
-* 裝飾者模式(Decorator)
-* 專注於在“**不修改原有對像或功能**”的前提下動態地為對象“**添加新功能**”
-* 何時使用:**多個功能需要做一些前置或後置工作**,可以統一裝飾,比如日誌驗證
-* 特徵:
-    * 不修改已有函數的源碼
-    * 不修改已有函數的調用方式
-    * 向現有功能添加額外功能
-* Python 內置的新函數可以通過 `＠` 擴展到現有對象
-* 常見的擴展類別有:**數據驗證(pydantic)**、**緩存**、日誌記錄、監控、**調試**、業務規則、加密、壓縮……
+* 裝飾器模式(Decorator)
+* 關注在"**不修改原物件或function**"的前提下，幫物件動態"**添加新功能**"
+* 使用時機: **多個 function 需要做些前置或後置的工作**，可以統一裝修，例如logging驗證
+* 功能特點:
+    * 不修改已有函數的原始碼
+    * 不修改已有函數的呼叫方式
+    * 給已有函數增加額外的功能
+* 在Python中建置好的新功能，可以透過`＠`對現有物件進行擴充
+* 常見的擴充範疇為：**資料驗證(pydantic)**、**Caching**、Logging、Monitoring、**Debugging**、Business Rules、Excryption、Compression…
 
 <details>
 <summary>Timeit</summary>
 
-* 不改變原來的對象f1
-* 執行f1之前:記下時間
-* 執行f1後:記錄時間,打印出f1的執行時間
-* 匹配時序:多個函數需要記錄執行時間
+* 不改變原物件 f1
+* 在執行f1之前: 記下時間
+* 在執行f1之後: 記下時間，併印出f1執行時間
+* 符合時機: 多個 function 需要記下執行時間
 
     ```python
     from functools import wraps
@@ -301,11 +389,11 @@ product.price # 150
 <details>
 <summary>Cache</summary>
 
-* 通過緩存機制,記下計算過程,遇到重複過程**避免重複計算**(streamlit也可以使用`@cache`處理加載數據)
-* 將經常重複使用的計算結果存放在存取速度較快的內存中,以加快獲取結果的方式.
-* 數據量大的時候會遇到內存佔用的問題,這是一把雙刃劍
+* 透過 cache 機制，記下運算過程，遇到重複過程時可**避免重複運算** (streamlit 在做 load data也可以用`@cache`處理)
+* 將經常重複使用的計算結果存放在存取速度較快的記憶體中，加速取得結果的方式。
+* 當數據量大時，會遇到內存被占用問題，這是一個雙面刃
 
-* 自定義一個簡單的緩存裝飾器,提高計算代價數組的性能. 通過緩存獲取重複的fib(i)
+* 自定義一個簡單 cache decorator，提升計算費式數列效能。重複的fib(i) 透過cache取得
 
     ```python
     from functools import wraps 
@@ -326,9 +414,9 @@ product.price # 150
         return fib(n-1) + fib(n-2)
     ```
 
-* %_內聯代碼_%
-    * 基於最近最少使用(LRU)算法實現緩存功能,自動管理緩存大小(**自動刪除最少使用**)
-    * maxsize 定義遞歸的深度,只需要注意
+* `functools.lru_cache(maxsize)`
+    * 基於最少使用(least recently used, LRU)算法實現緩存功能，會自動管理緩存大小(**自動刪除最少使用的**)
+    * maxsize 定義只需記下的遞迴深度
 
         ```python
         from functools import lru_cache
@@ -340,7 +428,7 @@ product.price # 150
             return fib(n-1) + fib(n-2)
         ```
 
-    * **適用於任意重複計算函數**
+    * **適用於任何重複計算的函數**
 
         ```python
         from functools import lru_cache
@@ -357,7 +445,7 @@ product.price # 150
         print(add(3, 4))  # 7 (from cache)
         ```
 
-    * 修改“返回變量對象”功能,需要使用copy. [參考](https://www.zhihu.com/question/350078061)
+    * 修飾"返回可變物件"的函數，需使用拷貝。[參考](https://www.zhihu.com/question/350078061)
 
         ```python
         from functools import lru_cache
@@ -388,7 +476,7 @@ product.price # 150
 <details>
 <summary>Debugging</summary>
 
-* debug通常是通過`print`來輔助的,從下面的函數可以看出,我們會侵入式修改對象,最終不得不去掉print,相當不方便
+* Debug 通常會透過 `print` 來協助，以下函式可以看到，我們會對該物件侵入式修改，最終得移掉print，相當不便
 
     ```python
     def sum(a, b):
@@ -398,7 +486,7 @@ product.price # 150
         return a+b
     ```
 
-* 通過調試裝飾器
+* 透過 debug decorator
 
     ```python
     def sum(a, b):
@@ -429,8 +517,8 @@ product.price # 150
 <details>
 <summary>Decorator with parameters</summary>
 
-* 多加一層裝飾器
-* 在限制輸出 k 之前
+* 多加一層 decorator
+* 限制輸出前 k
 
     ```python
     from functools import wraps
@@ -457,7 +545,7 @@ product.price # 150
 <details>
 <summary>Multi Decorator</summary>
 
-* 多個裝飾器的執行順序
+* 多個修飾器的執行順序
 
     ```python
     @decorator_a
@@ -472,18 +560,20 @@ product.price # 150
     ```
 </details>
 
+<a href="#top">Back to top</a>
+
 ## Strategy
 
-* 戰略模式(Strategy)
+* 策略模式(Strategy)
 
-* 屬於Behavior Mode,將一組**行為轉化為對象**
+* 屬於行為模式，將一組**行為轉換為物件**
 
-* 專注於在運行時選擇不同的算法或行為, **面對不同的情況,需要做出不同的行為,即策略**
-    * 排序算法有很多種,我們可以根據數據大小選擇不同的算法
+* 關注在運行時選擇不同的算法或行為，**面對不同情境，需要作出不同行為，即策略**
+    * 排序算法有多種，我們可以根據數據大小選擇不同的算法
 
-* 場景:大數據系統推送文件,根據不同類型採用**不同分析**
+* 場景: 大數據系統把文件推送過來，根據不同類型採取**不同解析**
     * 非設計模式
-         缺點:代碼臃腫,調整類型時需要改回原代碼
+        缺點: 代碼臃腫、類型調整時，需要更改到原代碼
         ```python
         if ():
             ...
@@ -493,12 +583,12 @@ product.price # 150
             ...
         ```
     * 策略模式
-        * `ParserStrategy`:策略的抽象基類,每個具體的解析策略都繼承這個類定義的行為`parse`
-        * `ParserContext`:解析後的上下文類,根據傳入的數據類型選擇對應的策略
+        * `ParserStrategy`: 策略的抽象基類，每個具體的解析策略都繼承該類定義的行為`parse`
+        * `ParserContext`: 解析的上下文類，根據傳入的數據類型選擇對應的策略
         ```python
         from abc import ABC, abstractmethod
 
-        class ParserStrategy(ABC): # 定義抽象基類,不可實例化
+        class ParserStrategy(ABC): # 定義抽象基類，不可實例化
             @abstractmethod
             def parse(self, data):
                 pass
@@ -592,63 +682,73 @@ context.parse_data(data)
 
 </details>
 
+<a href="#top">Back to top</a>
 
 ## MVC
 
-* **文件分離**:將不同功能的代碼放在不同的文件中
+* **檔案分離**: 把不同功用的程式碼放在不同的檔案裡
 
-    (三個文件夾:Model、View、Controller)
+    (三個檔案夾: Model, View, Controller)
 
-* 三種結構
-    * 模型:負責與數據庫通信
-    * View:負責管理屏幕的渲染,即HTML模板(template)
-    * Controller:程序邏輯,M和V之間的橋樑 . 來自路由的請求會先發送給Controller,然後Controller通知Model調度數據,將數據傳遞給查看生成模板(template)
+* 三個架構
+    * Model: 負責和資料庫溝通
+    * View: 負責管理畫面的呈現，也就是 HTML 樣板 (template)
+    * Controller: 程式邏輯，M與V的橋樑。來自路由的 request 會先被送到 Controller，再由 Controller 通知 Model 調度資料，並且把資料傳遞給 View 來產生樣板 (template)
 
         <img src='img/2023-06-16-11-28-31.png' width='60%' />
 
-* 路由器與控制器
+* Router vs Controller
 
-    * Router:工作分配,將對應的URI和controller放入routes[]
-    * Controller:負責工作,執行M和V之間的通信
+    * Router: 工作分配，將相對應的URI和controller放進routes[]中
+    * Controller: 負責工作，執行 M, V 之間溝通
 
-    (開發API時,只需要專注於使用Router來分隔不同的api路由即可)
+    (開發API時，只需要關注使用 Router，將不同api路由分離)
 
-* 優勢
-    * 非常直觀,容易理解
-    * 使用Controller分離Model和View,有一定程度的解耦
+* 優點
+    * 非常的直覺，好懂
+    * 使用 Controller 將 Model 和 View 分開來，具有一定程度的解耦合
 * 缺點
-    * **三者相互依賴**,一旦其中一個更新,另外兩個必須相應修改
-    * 隨著不斷的開發和添加功能,**Controller代碼會越來越臃腫**
-    * 很難進行單元測試
+    * **三者相互依賴**，一但更新了其中一者，另外兩者也必須跟著修改
+    * 隨著不斷的開發和添加功能，**Controller 的代碼會越來越臃腫**
+    * 難以進行單元測試
+
+<a href="#top">Back to top</a>
 
 ## MVP
 
-* 為了改善MVC的缺點,用Presenter替換Controller
-* 與MVC不同的是,Model層拿到數據後,不是直接傳給View更新,而是返回給Presenter,Presenter再傳數據給View,更新屏幕%_ddot_ %(從三者相互依存到兩者相互依存)
+* 為了改善 MVC 缺點，將Controller換成Presenter
+* 和 MVC 不同的是，Model 層拿到數據後，並不直接傳給 View 更新，而是交還給 Presenter，Presenter 再把數據交給 View，並更新畫面。 (從三者相互依賴變成兩者相互依賴)
 
     <img src='img/2023-06-16-11-34-12.png' width='60%' />
 
-* 優勢
-    * 從三者的相互依賴到只依賴Presenter(改動的地方比較少)
-    * 職責明確,分工明確
-    * View只負責在收到用戶反饋後調用Presenter獲取數據,並在收到數據時更新屏幕.
-    * Model被動接收Presenter命令,獲取數據,回傳給Presenter.
-    * Presenter通過接口與View和Model進行通信,是View和Model之間唯一的鏈接窗口.
-    * 方便單元測試
+* 優點
+    * 從三者相互依賴變成都只依賴 Presenter (要改動的地方變少了)
+    * 責任分明，分工明確
+    * View 只負責收到使用者回饋後，呼叫 Presenter 拿取數據，並在接收到數據的時候，更新畫面。
+    * Model 被動的接收到 Presenter 命令，拿取資料，並回傳給 Presenter。
+    * Presenter 透過介面與 View 和 Model 溝通，是 View 和 Model 的唯一連結窗口。
+    * 方便進行單元測試　
         
-        因為Presenter是通過接口操作View的,所以在對不依賴UI環境的Presenter進行單元測試的時候,可以mock一個View對象,就可以完全測試Presenter的正確性單元測試期間的業務邏輯性.
+        由於 Presenter 對 View 是透過介面進行操作，在對 Presenter 進行不依賴 UI 環境的單元測試的時候，可以 Mock 一個 View 對象，單元測試的時候就可以完整的測試 Presenter 業務邏輯的正確性。
 * 缺點
-    * 隨著不斷的開發和添加功能,Presenter的代碼會越來越臃腫
+    * 隨著不斷的開發和添加功能，Presenter 的代碼會越來越臃腫
+
+<a href="#top">Back to top</a>
 
 ## MVVM
 
-* 無論是MVC還是MVP,都無法避免Presenter(Controller)的代碼會越來越臃腫的問題. 如果能達到同樣的效果(外部行為),代碼越少越好(內部行為),於是MVVM誕生
-* 通過**ViewModel**巧妙的連接V,M
+* 不管是 MVC 還是 MVP，都無法避免 Presenter(Controller) 的代碼會越來越臃腫的問題，如果能達到一樣的效果(外部行為)，程式碼當然是越少越好囉(內部行為)，於是 MVVM 誕生了
+* 透過 **ViewModel** 將 V, M 巧妙連接
 
-... 未完成
+... 未完
+
+<a href="#top">Back to top</a>
+
 
 ## Reference
-[23種設計模式](https://jasonblog.github.io/note/design_pattern/index.html)
-[Python 中的設計模式](https://python-web-guide.readthedocs.io/zh/latest/design/design.html)
-[Python常用設計模式](https://refactoringguru.cn/design-patterns/python)
-[MVC、MVP、MVVM](https://ihelp.ithome.com.tw/articles/10218263)
+[23 種設計模式](https://jasonblog.github.io/note/design_pattern/index.html)
+[用 Python 實現設計模式](https://python-web-guide.readthedocs.io/zh/latest/design/design.html)
+[Python 常用設計模式](https://refactoringguru.cn/design-patterns/python)
+[MVC、MVP、MVVM](https://ithelp.ithome.com.tw/articles/10218263)
+
+<a href="#top">Back to top</a>

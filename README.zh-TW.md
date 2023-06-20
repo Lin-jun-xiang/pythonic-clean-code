@@ -14,7 +14,7 @@
     * [導入順序](#import-oder)
     * [字符串](#string)
     * [命名](#naming)
-    * [設計模式](./設計模式/)
+    * [設計模式](./design-pattern/)
     * [參考](#reference)
 
 ## Introduction
