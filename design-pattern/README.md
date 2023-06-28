@@ -21,7 +21,7 @@
         * **creative mode**
             * [Singleton](#singleton)
             * [Abstract Factory](#)
-            * [Builder](#)
+            * [Builder](#builder):heavy_check_mark:
             * [Factory Method](#)
             * [Prototype](#)
         * **structural mode**
@@ -74,7 +74,7 @@ Basic principles (1~5 also known as SOLID)
 #### Intro-Design Pattern
 
 * Creational Pattern
-    * **Simple Factory pattern** Use the static method of class to obtain different objects according to different conditions, and use the obtained objects to do similar things. The disadvantage is that when you want to add different conditions, you must modify the static method of the category.
+    * **Simple Factory pattern** Use the static method of the class to obtain different objects according to different conditions, and use the obtained objects to do similar things. The disadvantage is that when you want to add different conditions, you must modify the static method of the category.
     * **Factory Method Pattern (Factory Method Pattern)** avoids the simple factory pattern. When adding conditions, modify the static method of the factory class (the modification should be closed).
     * **Abstract Factory Pattern (Abstract Factory Pattern)** Abstract factory category, which can return factories of the same type. These return factories, with multiple identical methods, that do similar things.
     * **Builder Pattern (Builder Pattern)** sorts out the production steps of a certain type of product construction process, and all classes that want to produce this type of product must implement these standardized steps. In addition, in order to avoid missing a certain step during actual production, a series of production steps are performed by a single commander class.
@@ -82,17 +82,17 @@ Basic principles (1~5 also known as SOLID)
     * **Singleton Pattern** Allows a category to have only one instance (Instance) method. The way to generate a single instance: Lazy initialization: The instance is only generated when it is used for the first time. Eager initialization: An instance is generated when the class is loaded, regardless of whether it will be used later.
 
 * Structural Pattern
-    * **Adapter Pattern** An existing class, the interface is not what the user expects. The adapter is used as an intermediate interface to provide the interface expected by the user. It can be divided into two implementation methods Object Adapter Pattern (Object Adapter Pattern): Wrap the existing class instance in the adapter category. Class Adapter Pattern (class adapter pattern): use multiple inheritance.
+    * **Adapter Pattern** An existing class whose interface is not what the user expects. The adapter is used as an intermediate interface to provide the interface expected by the user. It can be divided into two implementation methods. Object Adapter Pattern (Object Adapter Pattern): Wrap the existing class instance in the adapter category. Class Adapter Pattern (class adapter pattern): use multiple inheritance.
     * **Bridge Pattern (Bridge Pattern)** extracts the specific behavior (implementation) of an object and becomes an independent object. That is, the original one object becomes two objects: "abstract object" + "real object". The advantage is that abstract objects and real objects can be decoupled and changed independently.
-    * **Composite Pattern** Several objects present a tree structure.
-    * **Decorator Pattern (Decorator Pattern)** Dynamically add functions to an object. The functions are applied layer by layer, and each layer executes different objects.
+    * **Composite Pattern** Between several objects, there is a tree structure.
+    * **Decorator Pattern (Decorator Pattern)** Dynamically add functions to an object. Functions are applied layer by layer, and each layer implements different objects.
     * **Facade Pattern** Package the original large system and open it to users with another simpler interface. Users only need to know how to use the interface. It is not necessary to understand the operation mode of each small system in the large system.
-    * **Flyweight Pattern** Between objects, if there are common parts that can be shared, the shareable parts will be separated as shared objects, and the non-shareable parts will be externalized, and then used Externalized parts are passed to shared objects. This has the advantage of reducing memory usage. The disadvantage is that the program logic may become more complex.
+    * **Flyweight Pattern** Between objects, if there are common parts that can be shared, the shareable parts will be separated as shared objects, and the non-shareable parts will be externalized, and then used Externalized parts are passed to shared objects. This has the advantage of reducing memory usage. The disadvantage is that the program logic may become more complicated.
     * **Proxy Pattern (Proxy Pattern)** There are two objects, the proxy object and the real object. The system uses the proxy object to operate, and the real object is operated inside the proxy object. Application: remote agent, virtual agent, security agent
 
 * Behavioral pattern
     * **Chain-of-responsibility Pattern** There are several objects that can handle a certain request, but the scope of processing (permissions) is different. When this object does not have processing permissions, it can Pass this request to the next object to continue processing.
-    * **Command Pattern (Command Pattern)** General commands include issuing commands and executing commands. The command mode is to split this process into three objects, the object that issues the command (Invoker), the object that executes the command (command), and the object that executes the command (receiver). The Invoker object is used to build the command to be executed. In this way, when it is necessary to expand the function, such as adding repeated execution of commands, canceling commands ..., etc., it becomes simpler.
+    * **Command Pattern (Command Pattern)** General commands include issuing commands and executing commands. The command mode is to split this process into three objects, the object that issues the command (Invoker), the object that executes the command (command), and the object that executes the command (receiver). The Invoker object is used to build the command to be executed. In this way, when it is necessary to expand the function, such as adding commands to repeat execution, canceling commands ..., etc., it becomes simpler.
     * **Interpreter Pattern (Interpreter Pattern)** is used to explain and translate a language.
     * **Iterator Pattern (Iterator Pattern)** A method of traversing the elements in the container.
     * **Mediator Pattern** When there may be intricate interactions between objects, these relationships can be handed over to another object (mediator) to reduce the interaction between these objects coupling.
@@ -415,7 +415,7 @@ product.price # 150
     ```
 
 * `functools.lru_cache(maxsize)`
-    * implements the cache function based on the least recently used (LRU) algorithm, and automatically manages the cache size (**automatically delete the least used**)
+    * Implement the cache function based on the least recently used (LRU) algorithm, and automatically manage the cache size (**automatically delete the least used**)
     * maxsize defines the depth of recursion that only needs to be noted
 
         ```python
@@ -510,6 +510,33 @@ product.price # 150
     kwargs {}
     sum = 3
     """
+    ```
+
+</details>
+
+<details>
+<summary>contextmanager 資源管理器</summart>
+
+* Reference: emoji_ https://blog.gtwang.org/programming/python-with-context-manager-tutorial/
+* Resource management is a very common problem in programming, such as managing open files, network sockets and various locks (locks), etc. The main problem is that we must ensure that these open resources are used up , have indeed been closed (or released), if you forget to close these resources, it will cause performance problems in program execution, or even errors.
+     For example: when xlrd reads the excel file, if it is not closed correctly, the excel process will be stuck
+* In addition to using `try...finally...`, the Python language provides a unique syntax of `with`, which makes it easier for programmers to manage these open resources. Under this syntax structure, Python programs will automatically create resources , Cleanup and recycling actions, making it more convenient for programmers to use various resources.
+* `contextmanger` decoration, which can make the code more concise and customize the resource manager
+
+    ```python
+    from contextlib import contextmanager
+
+    # 自行定義 Context Manager
+    @contextmanager
+    def open_file(name, mode):
+        # 配給資源(開啟檔案)
+        f = open(name, mode)
+        yield f
+        # 回收資源(關閉檔案)
+        f.close()
+
+    with open_file('file.txt', 'w') as f:
+        f.write("Hello, world.")
     ```
 
 </details>
@@ -749,6 +776,6 @@ context.parse_data(data)
 [23 Design Patterns](https://jasonblog.github.io/note/design_pattern/index.html)
 [Design Patterns in Python](https://python-web-guide.readthedocs.io/zh/latest/design/design.html)
 [Python Common Design Patterns](https://refactoringguru.cn/design-patterns/python)
-[MVC, MVP, MVVM](https://ihelp.ithome.com.tw/articles/10218263)
+[MVC, MVP, MVVM](https://ihelp.ihome.com.tw/articles/10218263)
 
 <a href="#top">Back to top</a>
