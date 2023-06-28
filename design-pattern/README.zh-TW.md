@@ -21,7 +21,7 @@
         * **創建型模式**
             * [Singleton](#singleton)
             * [Abstract Factory](#)
-            * [Builder](#)
+            * [Builder](#builder):heavy_check_mark:
             * [Factory Method](#)
             * [Prototype](#)
         * **結構型模式**
@@ -510,6 +510,33 @@ product.price # 150
     kwargs {}
     sum = 3
     """
+    ```
+
+</details>
+
+<details>
+<summary>contextmanager 資源管理器</summart>
+
+* 參考: https://blog.gtwang.org/programming/python-with-context-manager-tutorial/
+* 資源的管理在程式設計上是一個很常見的問題，例如管理開啟的檔案、網路 socket 與各種鎖定（locks）等，最主要的問題點就在於我們必須確保這些開啟的資源在使用完之後，有確實被關閉（或釋放），如果忘記關閉這些資源，就會造成程式執行上的效能問題，甚至出現錯。
+    例如: xlrd 讀取 excel 文件時，若未正確關閉，會造成 excel 進程卡死
+* 除了使用 `try...finally...`之外，Python 語言提供了 `with` 這個獨特的語法，可讓程式設計者更容易管理這些開啟的資源，在這樣的語法架構之下，Python 程式會自動進行資源的建立、清理與回收動作，讓程式設計者在使用各種資源時更為方便。
+* `contextmanger` 裝飾，可以讓代碼更為簡潔、自定義資源管理器
+
+    ```python
+    from contextlib import contextmanager
+
+    # 自行定義 Context Manager
+    @contextmanager
+    def open_file(name, mode):
+        # 配給資源（開啟檔案）
+        f = open(name, mode)
+        yield f
+        # 回收資源（關閉檔案）
+        f.close()
+
+    with open_file('file.txt', 'w') as f:
+        f.write("Hello, world.")
     ```
 
 </details>
